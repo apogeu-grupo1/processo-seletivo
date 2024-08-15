@@ -1,5 +1,10 @@
-.navbar {
+body {
     background-color: lightgrey;
+}
+
+
+.navbar {
+    background-color: white;
     height: 100px;
     display: flex;
     align-items: center;
@@ -56,4 +61,48 @@
 .nav-links li a:hover {
     background-color: #fefdfd;
     border-radius: 5px;
+}
+
+.row {
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: row;
+   /* width: 100%;*/
+    background-color: white;
+    height: 250px;
+
+}
+
+.tutorial-box {
+    width: 25%;
+    align-items:  center;
+    display: flex;
+
+}
+
+.tutorial-row{
+    justify-content: space-between;
+}
+
+.tutorial-text {
+    text-align: center;
+    font-size: 20px;
+
+}
+
+.books-row {
+    margin-top: 20px;
+}
+
+.book-img {
+    height: 150px;
+    width: auto;
+}
+
+.book-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+    text-align: center;
 }
