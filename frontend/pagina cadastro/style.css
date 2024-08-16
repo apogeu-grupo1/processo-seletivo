@@ -156,6 +156,11 @@ body{
     border-color: #2ACAC7;
 }
 
+.botaoDeCadastro:hover{
+    background-color: #15A6A3;
+    border-color: #15A6A3;
+}
+
 .botaoInteiro{
     padding-top: 30vh;
 }
