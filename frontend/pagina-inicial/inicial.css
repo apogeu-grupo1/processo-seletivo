@@ -1,10 +1,10 @@
 body {
-    background-color: lightgrey;
+    background-color: white;
 }
 
 
 .navbar {
-    background-color: white;
+    background-color:  #15A6A3;
     height: 100px;
     display: flex;
     align-items: center;
@@ -68,14 +68,16 @@ body {
     display: flex;
     flex-direction: row;
    /* width: 100%;*/
-    background-color: white;
+   
     height: 250px;
 
 }
 
 .tutorial-box {
+    background-color: #15A6A3;
     width: 25%;
     align-items:  center;
+    justify-content: center;
     display: flex;
 
 }
@@ -92,6 +94,7 @@ body {
 
 .books-row {
     margin-top: 20px;
+     background-color: #15A6A3;
 }
 
 .book-img {
