@@ -161,20 +161,21 @@ input:focus{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     background-color: #E7E7E7;
-    width: 30vw;
+    width: 32.5vw;
     border-radius: 10px;
-    
+    padding-left: 4.5vw;
+        
 }   
 
-.generoInput{
+.textoGeneros{
     padding-left: 5vw;
-    padding-top: 6vh;
+    padding-top: 4.5vh;
 }
 
 .opcoesGenerosContainer button{
     background-color: #ffffff;
     height: 6vh;
-    width: 6vw;
+    width: 9vw;
     margin: 8%;
     border-radius: 10px;
     border: none;
