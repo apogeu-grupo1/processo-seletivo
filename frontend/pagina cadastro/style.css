@@ -1,102 +1,143 @@
 *{
-    margin:0;
+    margin: 0.8%;
     padding: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-top: 0.1%;
+    
 }
 
 body{
-    background-color: #0B9391;
+    background-color: #9FD4D4;
+
 }
+
+.container{
+    border-color: #E7E7E7;
+    background-color: #E7E7E7;
+    border-radius: 10px;
+}
+
+
 
 .emailContainer{
     display: flex;
     flex-direction: column;
-    padding-top:10vh;
-    padding-left: 6vw;
+    padding-top:6vh;
+    padding-left: 4vw;
 }
 
 .emailContainer input{
     height: 5vh;
     width: 30vw;
+    background-color: #f6f6f6;
+    border-color: #f6f6f6;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .usernameContainer{
     display: flex;
     flex-direction: column;
-    padding-top:10vh;
-    padding-left: 6vw;
+    padding-top:8vh;
+    padding-left: 4vw;
 }
 
 .usernameContainer input{
     height: 5vh;
     width: 30vw;
+    background-color: #f6f6f6;
+    border-color: #f6f6f6;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .senhaContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 10vh;;
-    padding-left: 6vw;
+    padding-top: 8vh;;
+    padding-left: 4vw;
+    
 }
 
 .senhaContainer input{
     height: 5vh;
     width: 30vw;
+    background-color: #f6f6f6;
+    border-color: #f6f6f6;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .confirmaSenhaContainer{
     display: flex;
     flex-direction: column;
-    padding-top:10vh;
-    padding-left: 6vw;
+    padding-top:8vh;
+    padding-left: 4vw;
+    padding-bottom: 6vh;
 }
 
 .confirmaSenhaContainer input{
     height: 5vh;
     width: 30vw;
+    background-color: #f6f6f6;
+    border-color: #f6f6f6;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .cidadeContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 10vh;
-    padding-left: 6vw;
+    padding-top: 6vh;
+    padding-left: 5vw;
 }
 
 .cidadeContainer input{
     height: 5vh;
     width: 30vw;
+    background-color: #f6f6f6;
+    border-color: #f6f6f6;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
     
 }
 
 .paisContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 10vh;
+    padding-top: 8vh;
 }
 
 .paisContainer input{
     height: 5vh;
     width: 20vw;
+    background-color: #f6f6f6;
+    border-color: #f6f6f6;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .estadoContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 10vh;
-    padding-left: 5vw;
+    padding-top: 9vh;
+    padding-left: 4vw;
 }
 
 .estadoContainer input{
     height: 5vh;
     width: 5vw;
+    background-color: #f6f6f6;
+    border-color: #f6f6f6;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .paisEstadoContainer{
     display: flex;
     flex-direction: row;
     margin: none;
-    padding-left: 6vw;
+    padding-left: 5vw;
 }
 
 .allInputsContainer{
@@ -107,24 +148,24 @@ body{
 .opcoesGenerosContainer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    background-color: #15A6A3;
+    background-color: #E7E7E7;
     width: 30vw;
     border-radius: 10px;
     
 }   
 
 .generoInput{
-    padding-left: 6vw;
-    padding-top: 10vh;
+    padding-left: 5vw;
+    padding-top: 7vh;
 }
 
 .opcoesGenerosContainer button{
-    background-color: #2ACAC7;
+    background-color: #ffffff;
     height: 6vh;
     width: 6vw;
     margin: 8%;
     border-radius: 10px;
-    border-color: #2ACAC7;
+    border-color: #ffffff;
     
 }
 
@@ -144,7 +185,7 @@ body{
 }
 
 .fotoECadastroContainer{
-    padding-top: 10vh;
+    padding-top: 7vh;
     padding-left: 6vw;
 }
 
@@ -152,8 +193,9 @@ body{
     height: 12vh;
     width: 9vw;
     border-radius: 10px;
-    background-color: #2ACAC7;
-    border-color: #2ACAC7;
+    background-color: #4DB1D1;
+    border-color: #4DB1D1;
+    color: #ffffff;
 }
 
 .botaoDeCadastro:hover{
