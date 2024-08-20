@@ -30,7 +30,7 @@ body{
     height: 5vh;
     width: 30vw;
     background-color: #f6f6f6;
-    border-color: #f6f6f6;
+    border: none;
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -46,7 +46,7 @@ body{
     height: 5vh;
     width: 30vw;
     background-color: #f6f6f6;
-    border-color: #f6f6f6;
+    border: none;
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -63,7 +63,7 @@ body{
     height: 5vh;
     width: 30vw;
     background-color: #f6f6f6;
-    border-color: #f6f6f6;
+    border: none;
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -80,7 +80,7 @@ body{
     height: 5vh;
     width: 30vw;
     background-color: #f6f6f6;
-    border-color: #f6f6f6;
+    border: none;
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -96,7 +96,7 @@ body{
     height: 5vh;
     width: 30vw;
     background-color: #f6f6f6;
-    border-color: #f6f6f6;
+    border: none;
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
     
@@ -112,7 +112,7 @@ body{
     height: 5vh;
     width: 20vw;
     background-color: #f6f6f6;
-    border-color: #f6f6f6;
+    border: none;
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -128,7 +128,7 @@ body{
     height: 5vh;
     width: 5vw;
     background-color: #f6f6f6;
-    border-color: #f6f6f6;
+    border: none;
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -165,8 +165,12 @@ body{
     width: 6vw;
     margin: 8%;
     border-radius: 10px;
-    border-color: #ffffff;
+    border: none;
     
+}
+
+.opcoesGenerosContainer button:hover{
+    background-color: #efefef;
 }
 
 .fotoStiloContainer{
@@ -176,7 +180,7 @@ body{
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    border: 1px solid black;
+    border: none;
     border-radius: 10px;
 }
 
@@ -194,13 +198,13 @@ body{
     width: 9vw;
     border-radius: 10px;
     background-color: #4DB1D1;
-    border-color: #4DB1D1;
+    border: none;
     color: #ffffff;
 }
 
-.botaoDeCadastro:hover{
+.botaoDeCadastro:active{
     background-color: #15A6A3;
-    border-color: #15A6A3;
+    border: none;
 }
 
 .botaoInteiro{
