@@ -30,7 +30,7 @@ input:focus{
 .emailContainer{
     display: flex;
     flex-direction: column;
-    padding-top:6vh;
+    padding-top:4vh;
     padding-left: 4vw;
 }
 
@@ -100,7 +100,7 @@ input:focus{
 .cidadeContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 6vh;
+    padding-top: 4vh;
     padding-left: 5vw;
 }
 
@@ -132,7 +132,7 @@ input:focus{
 .estadoContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 8.5vh;
+    padding-top: 9vh;
     padding-left: 4vw;
 }
 
@@ -201,7 +201,7 @@ input:focus{
 }
 
 .fotoECadastroContainer{
-    padding-top: 7vh;
+    padding-top: 5vh;
     padding-left: 6vw;
 }
 
