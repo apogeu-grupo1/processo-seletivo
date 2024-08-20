@@ -2,7 +2,7 @@
     margin: 0.8%;
     padding: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding-top: 0.1%;
+    padding-top: 0.25%;
     
 }
 
@@ -11,13 +11,21 @@ body{
 
 }
 
+
+
 .container{
     border-color: #E7E7E7;
     background-color: #E7E7E7;
     border-radius: 10px;
 }
 
+input{
+    padding-left: 0.5vw;
+}
 
+input:focus{
+    outline: none;
+}
 
 .emailContainer{
     display: flex;
@@ -33,6 +41,10 @@ body{
     border: none;
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.emailContainer input:active{
+    border: none;
 }
 
 .usernameContainer{
@@ -120,7 +132,7 @@ body{
 .estadoContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 9vh;
+    padding-top: 8.5vh;
     padding-left: 4vw;
 }
 
@@ -156,7 +168,7 @@ body{
 
 .generoInput{
     padding-left: 5vw;
-    padding-top: 7vh;
+    padding-top: 6vh;
 }
 
 .opcoesGenerosContainer button{
@@ -176,7 +188,7 @@ body{
 .fotoStiloContainer{
     background-color: #D3D3D3; 
     width: 100%;
-    height: 150px; 
+    height: 25vh; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
@@ -194,8 +206,8 @@ body{
 }
 
 .botaoDeCadastro{
-    height: 12vh;
-    width: 9vw;
+    height: 9vh;
+    width: 12vw;
     border-radius: 10px;
     background-color: #4DB1D1;
     border: none;
