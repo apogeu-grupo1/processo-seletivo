@@ -1,0 +1,162 @@
+*{
+    margin:0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body{
+    background-color: #0B9391;
+}
+
+.emailContainer{
+    display: flex;
+    flex-direction: column;
+    padding-top:10vh;
+    padding-left: 6vw;
+}
+
+.emailContainer input{
+    height: 5vh;
+    width: 30vw;
+}
+
+.usernameContainer{
+    display: flex;
+    flex-direction: column;
+    padding-top:10vh;
+    padding-left: 6vw;
+}
+
+.usernameContainer input{
+    height: 5vh;
+    width: 30vw;
+}
+
+.senhaContainer{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10vh;;
+    padding-left: 6vw;
+}
+
+.senhaContainer input{
+    height: 5vh;
+    width: 30vw;
+}
+
+.confirmaSenhaContainer{
+    display: flex;
+    flex-direction: column;
+    padding-top:10vh;
+    padding-left: 6vw;
+}
+
+.confirmaSenhaContainer input{
+    height: 5vh;
+    width: 30vw;
+}
+
+.cidadeContainer{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10vh;
+    padding-left: 6vw;
+}
+
+.cidadeContainer input{
+    height: 5vh;
+    width: 30vw;
+    
+}
+
+.paisContainer{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10vh;
+}
+
+.paisContainer input{
+    height: 5vh;
+    width: 20vw;
+}
+
+.estadoContainer{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10vh;
+    padding-left: 5vw;
+}
+
+.estadoContainer input{
+    height: 5vh;
+    width: 5vw;
+}
+
+.paisEstadoContainer{
+    display: flex;
+    flex-direction: row;
+    margin: none;
+    padding-left: 6vw;
+}
+
+.allInputsContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.opcoesGenerosContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: #15A6A3;
+    width: 30vw;
+    border-radius: 10px;
+    
+}   
+
+.generoInput{
+    padding-left: 6vw;
+    padding-top: 10vh;
+}
+
+.opcoesGenerosContainer button{
+    background-color: #2ACAC7;
+    height: 6vh;
+    width: 6vw;
+    margin: 8%;
+    border-radius: 10px;
+    border-color: #2ACAC7;
+    
+}
+
+.fotoStiloContainer{
+    background-color: #D3D3D3; 
+    width: 100%;
+    height: 150px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.iconeContainer{
+    font-size: 100px;
+}
+
+.fotoECadastroContainer{
+    padding-top: 10vh;
+    padding-left: 6vw;
+}
+
+.botaoDeCadastro{
+    height: 12vh;
+    width: 9vw;
+    border-radius: 10px;
+    background-color: #2ACAC7;
+    border-color: #2ACAC7;
+}
+
+.botaoInteiro{
+    padding-top: 30vh;
+}
+
