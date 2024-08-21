@@ -1,0 +1,44 @@
+*{
+    padding: 0;
+    margin: 0;
+
+}
+
+body{
+    background-color: #a0d4d4;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 0;
+}
+
+.container{
+    padding: 20px;
+    background-color: #EBEBEB;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.imagens{
+    display: flex;
+    flex-direction: column;
+    
+    padding-left: 4%;
+    padding-top: 2%;
+}
+
+.primeira-fileira, .segunda-fileira{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.imagens img{
+    height: 33vh;
+    width: 12vw;
+    padding-right: 4vw;
+    padding-bottom: 8vh;
+} 
