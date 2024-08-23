@@ -53,28 +53,28 @@
                     <p>Gêneros preferidos (até 3)</p>
                 </div>
                     <div class="opcoesGenerosContainer">
-                        <button class = "firstRowGeneros" type="button">Romance</button>
-                        <button type="button">Ficção Científica</button>
-                        <button type="button">Fantasia</button>
-                        <button class = "firstRowGeneros" type="button">Terror</button>
-                        <button type="button">Mistério</button>
-                        <button type="button">Biografia</button>
-                        <button class = "firstRowGeneros" type="button">Histórico</button>
-                        <button type="button">Aventura</button>
-                        <button type="button">Autoajuda</button>
+                        <button onclick="adicionarGenero(event)" class = "firstRowGeneros" type="button">Romance</button>
+                        <button onclick="adicionarGenero(event)" type="button">Ficção Científica</button>
+                        <button onclick="adicionarGenero(event)" type="button">Fantasia</button>
+                        <button onclick="adicionarGenero(event)" class = "firstRowGeneros" type="button">Terror</button>
+                        <button onclick="adicionarGenero(event)" type="button">Mistério</button>
+                        <button onclick="adicionarGenero(event)" type="button">Biografia</button>
+                        <button onclick="adicionarGenero(event)" class = "firstRowGeneros" type="button">Histórico</button>
+                        <button onclick="adicionarGenero(event)" type="button">Aventura</button>
+                        <button onclick="adicionarGenero(event)" type="button">Autoajuda</button>
                     </div>
+
+                    <input class="input-invisivel" type="text">
                 
             </div><!--inputs2Container-->
             
             <div class="fotoECadastroContainer">
-                <div class="fotoContainer">
-                    <p>Foto (Opcional)</p>
-                <div class="fotoStiloContainer">
-                    <span class="iconeContainer">
-                        &#128100;
-                    </span>
-                </div>
-                </div>
+                <p>Foto (opcional)</p>
+                <label class="picture">
+                    <input type="file" accept="image/*" class="picture__input">
+                    <span class="picture__image">&#128100;</span>
+                </label>
+
                 <div class="botaoInteiro">
                     <button class="botaoDeCadastro" type="button">CADASTRAR</button>
 
@@ -83,4 +83,5 @@
         </div>
     </div><!--allInputsContainer-->            
 </body>
+<script src="cadastro.js"></script>
 </html>
