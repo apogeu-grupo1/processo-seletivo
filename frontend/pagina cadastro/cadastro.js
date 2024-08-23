@@ -10,8 +10,6 @@ function adicionarGenero(event){
     } else if (generosPreferidos.length < 3) {
         generosPreferidos.push(genero);
         botao.classList.add('selecionado');
-    } else{
-        alert("Você já selecionou 3 elementos");
     }
 
     console.log(generosPreferidos);
