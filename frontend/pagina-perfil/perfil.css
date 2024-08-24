@@ -67,6 +67,9 @@ main {
 .nav-links li a {
     color: rgb(75, 80, 81);
     text-decoration: none;
+    background-color: #9FD4D4;
+    border-radius: 5px;
+    padding: 4px;
 }
 
 .nav-links li a:hover {
