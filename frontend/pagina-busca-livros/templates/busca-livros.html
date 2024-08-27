@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Busca de livros</title>
-    <link rel="stylesheet" href="busca-livros.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='busca-livros.css') }}">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
-            <a href="index.html">
-                <img src="./img/logo.png" alt="Logo", height="150"> <!-- Mudar a logo depois -->
+            <a href="{{ url_for('static', filename='index.html') }}">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" height="150"> <!-- Mudar a logo depois -->
             </a>
         </div>
 
         <div class="searchbar">
-            <input type="text" placeholder="Pesquisar...">
+            <form action="/search" method="GET">
+                <input type="text" name="q" placeholder="Pesquisar...">
+                <button class="botao-busca" type="submit">Buscar</button>
+            </form>
         </div>
 
         <ul class="nav-links">
@@ -31,10 +34,11 @@
         </ul>
         <div class="profile">
             <a href="#perfil"></a>
-                <img src="./img/foto-perfil.png" alt="Perfil", height="80">
+                <img src="{{ url_for('static', filename='img/foto-perfil.png') }}" alt="Perfil" height="80">
             </a>
             <div class="dropdown-foto">
                 <a href="#meuperfil">Meu Perfil</a>
+                <a href="#amigos">Amigos</a>
                 <a href="#configuracoes">Configurações</a>
                 <a href="#sair">Sair</a>
             </div>
@@ -44,19 +48,12 @@
     <div class="container">
         <div class="imagens">
             <div class="primeira-fileira">
-                <a href=""><img src="./Img/calice-de-fogo.jpg"></a>
-                <a href=""><img src="./Img/camera-secreta.jpg"></a>
-                <a href=""><img src="./Img/crianca-amaldicoada.jpg"></a>
-                <a href=""><img src="./Img/enigma-do-principe.jpg"></a>
-                <a href=""><img src="./Img/ordem-da-fenix.jpg"></a>
-            </div>
-
-            <div class="segunda-fileira">
-                <a href=""><img src="./Img/pedra-filosofal.jpg"></a>
-                <a href=""><img src="./Img/percy-jackson-ladrao-de-raios.jpg"></a>
-                <a href=""><img src="./Img/Percy-jackson-mar-de-monstros.jpg"></a>
-                <a href=""><img src="./Img/prisioneiro-de-asghard.jpg"></a>
-                <a href=""><img src="./Img/reliquias-da-morte.jpg"></a>
+                {% for item in data %}
+                <div class="livro-titulo">
+                    <a href="#" class="imagensLivros"><img src="{{ item.foto }}" alt="{{ item.titulo }}"></a>
+                    <label for="imagensLivros">{{item.titulo}}</label>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
