@@ -27,10 +27,26 @@ input:focus{
     outline: none;
 }
 
+.nomeContainer{
+    display: flex;
+    flex-direction: column;
+    padding-top:3vh;
+    padding-left: 3vw;
+}
+
+.nomeContainer input{
+    height: 5vh;
+    width: 30vw;
+    background-color: #f6f6f6;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .emailContainer{
     display: flex;
     flex-direction: column;
-    padding-top:4vh;
+    padding-top:3vh;
     padding-left: 3vw;
 }
 
@@ -43,18 +59,14 @@ input:focus{
     font-family: 'Courier New', Courier, monospace;
 }
 
-.emailContainer input:active{
-    border: none;
-}
-
-.usernameContainer{
+.telefoneContainer{
     display: flex;
     flex-direction: column;
-    padding-top:8vh;
+    padding-top:3vh;
     padding-left: 3vw;
 }
 
-.usernameContainer input{
+.telefoneContainer input{
     height: 5vh;
     width: 30vw;
     background-color: #f6f6f6;
@@ -66,7 +78,7 @@ input:focus{
 .senhaContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 8vh;;
+    padding-top: 3vh;;
     padding-left: 3vw;
     
 }
@@ -83,7 +95,7 @@ input:focus{
 .confirmaSenhaContainer{
     display: flex;
     flex-direction: column;
-    padding-top:8vh;
+    padding-top:3vh;
     padding-left: 3vw;
     padding-bottom: 6vh;
 }
@@ -97,14 +109,30 @@ input:focus{
     font-family: 'Courier New', Courier, monospace;
 }
 
-.cidadeContainer{
+.usernameContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 4vh;
+    padding-top:2.5vh;
     padding-left: 5vw;
 }
 
-.cidadeContainer input{
+.usernameContainer input{
+    height: 5vh;
+    width: 30vw;
+    background-color: #f6f6f6;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.paisContainer{
+    display: flex;
+    flex-direction: column;
+    padding-top: 3vh;
+    padding-left: 5vw;
+}
+
+.paisContainer input{
     height: 5vh;
     width: 30vw;
     background-color: #f6f6f6;
@@ -114,13 +142,14 @@ input:focus{
     
 }
 
-.paisContainer{
+.cidadeContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 8vh;
+    padding-top: 3vh;
+    padding-left: 2vw;
 }
 
-.paisContainer input{
+.cidadeContainer select{
     height: 5vh;
     width: 20vw;
     background-color: #f6f6f6;
@@ -132,20 +161,19 @@ input:focus{
 .estadoContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 9vh;
-    padding-left: 4vw;
+    padding-top: 3.7vh
 }
 
-.estadoContainer input{
+.estadoContainer select{
     height: 5vh;
-    width: 5vw;
+    width: 7vw;
     background-color: #f6f6f6;
     border: none;
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
 }
 
-.paisEstadoContainer{
+.cidadeEstadoContainer{
     display: flex;
     flex-direction: row;
     margin: none;
@@ -169,14 +197,14 @@ input:focus{
 
 .textoGeneros{
     padding-left: 5vw;
-    padding-top: 4.5vh;
+    padding-top: 1h;
 }
 
 .opcoesGenerosContainer button{
     background-color: #ffffff;
     height: 6vh;
     width: 9vw;
-    margin: 8%;
+    margin: 3.3% 8%;
     border-radius: 10px;
     border: none;
     
