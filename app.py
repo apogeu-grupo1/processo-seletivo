@@ -5,7 +5,7 @@ import uuid
 from flask_bcrypt import Bcrypt
 from flask import Flask, request, jsonify, redirect, url_for, render_template, session
 
-
+"""
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
@@ -126,7 +126,7 @@ def loginPost():
 
         # Gera um cookie de login (token de login)
         login_token = str(uuid.uuid4())
-        
+        print(login_token)
         # Armazena o token no banco de dados
         cursor.execute('''UPDATE Clientes SET "Login Token" = ? WHERE "UUID Cliente" = ?''', (login_token, uuid_cliente))
         conn.commit()
@@ -136,10 +136,16 @@ def loginPost():
 
         # Redireciona para a página inicial
         return redirect(url_for('homepage'))
-"""
+
 @app.route('/', methods=['GET'])
 def homepage():
-    return "Bem-vindo à página inicial!"
+    login_token = session['login_token']
+    print(login_token)
+    if login_token:
+        return f'O valor do token de login é: {login_token}'
+    else:
+        return 'Token de login não encontrado na sessão!'
+    #return "Bem-vindo à página inicial!"
 
 if __name__ == '__main__':
     init_db()
