@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="/static/css/pagina-inicial.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/templates/pagina-inicial.html">
+                <img src="/static/img/logo.png" alt="Logo" height="150"> <!-- Mudar a logo depois -->
+            </a>
+        </div>
+
+        <div class="searchbar">
+            <form action="/search" method="GET">
+                <input type="text" name="q" placeholder="Pesquisar...">
+                <button class="botao-busca" type="submit">Buscar</button>
+            </form>
+        </div>
+
+        <ul class="nav-links">
+            <li class="dropdown-categorias">
+                <a href="#categorias">Categorias</a> <!-- Mudar o link de redirecionamento -->
+
+                <div class="dropdown-categorias-menu">
+                    <a href="#categorias1">Categorias 1</a>
+                    <a href="#categorias2">Categorias 2</a>
+                    <a href="#categorias3">Categorias 3</a>
+                </div>
+            </li>
+        </ul>
+        <div class="profile">
+            <a href="#perfil"></a>
+                <img src="/static/img/foto-perfil.png" alt="Perfil" height="80">
+            </a>
+            <div class="dropdown-foto">
+                <a href="#meuperfil">Meu Perfil</a>
+                <a href="#amigos">Amigos</a>
+                <a href="#configuracoes">Configurações</a>
+                <a href="#sair">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+    	<div class="row tutorial-row">
+    		<div class="tutorial-box">
+
+    			
+    			<p class="tutorial-text">Você tem que realizar seu registro</p>
+
+    		</div>
+    		<div class="tutorial-box">
+    			<p class="tutorial-text">Em seguida você vai encontrar o livro que deseja trocar</p>
+    		</div>
+    		<div class="tutorial-box">
+    			<p class="tutorial-text">E então é só realizar a troca com seu amigo!</p>
+    		</div>
+    	</div>
+
+		<div class="all-books">
+			{% for item in genero1 %}
+			<p class = "texto-genero">{{ item.nome }}</p>
+			{% endfor %}
+			<div class="row books-row" id="img">
+				{% for item in data1 %}
+				<div class="book-container">
+					<a href="">
+						<img src="{{ item.foto }}"  class="book-img">
+						<p>{{ item.nome }}</p>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+
+			{% for item in genero2 %}
+			<p class = "texto-genero">{{ item.nome }}</p>
+			{% endfor %}
+			<div class="row books-row" id="img">
+				{% for item in data2 %}
+				<div class="book-container">
+					<a href="">
+						<img src="{{ item.foto }}"  class="book-img">
+						<p>{{ item.nome }}</p>
+					</a>
+				</div>
+				{% endfor %}
+				
+			</div>
+
+			{% for item in genero3 %}
+			<p class = "texto-genero">{{ item.nome }}</p>
+			{% endfor %}
+			<div class="row books-row" id="img">
+				{% for item in data3 %}
+				<div class="book-container">
+					<a href="">
+						<img src="{{ item.foto }}"  class="book-img">
+						<p>{{ item.nome }}</p>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+    </div>
+</body>
+</html>
