@@ -1,0 +1,6 @@
+A rota sozinha já está em funcionamento utilizando o sistema de sessão 
+integrado no banco de dados, apenas como uma tabela.
+Entretanto, como comentei no código, talvez ainda faltaria integrar essa rota à 
+rota de login que o Eduardo fez. Não sei se a minha abordagem usando banco de dados
+já seria suficiente para verificar se o usuário ja está logado quando juntássemos
+as rotas.
