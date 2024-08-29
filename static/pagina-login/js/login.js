@@ -6,7 +6,7 @@ document.getElementById('submitLogin').addEventListener('click', async function(
         password: document.getElementById('password').value,
     };
 
-    fetch('/login', {
+    /*fetch('/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -16,6 +16,29 @@ document.getElementById('submitLogin').addEventListener('click', async function(
     .then(response => response.json())
     .then(data => {
         alert(data.message);
+    })
+    .catch(error => console.error('Error:', error));*/
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (response.redirected) {
+            // Se o backend redirecionar, isso detecta e redireciona o navegador
+            window.location.href = response.url;
+        } else {
+            return response.json();
+        }
+    })
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else if (data.message) {
+            alert(data.message);
+        }
     })
     .catch(error => console.error('Error:', error));
 });
