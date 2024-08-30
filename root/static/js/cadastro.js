@@ -117,11 +117,11 @@ document.getElementById('submitButton').addEventListener('click', async function
     .then(response => response.json())
     .then(data => {
         if (data.message === 'Cadastro realizado com sucesso!') {
-            window.location.href = '/home';
+            window.location.href = '/'; // Acesso à rota '/' (home) para verificar se o login é necessário
         } else {
             alert('Erro ao realizar o cadastro: ' + data.message);
         }
-        })
+    })
     .catch(error => console.error('Error:', error));
 });
 
