@@ -1,0 +1,332 @@
+*{
+    padding: 0;
+    margin: 0;
+
+}
+
+body{
+    background-color: #a0d4d4;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    
+}
+
+.navbar {
+    background-color:  #15A6A3;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    position: relative;
+    bottom: 10px;
+    right: 10px;
+    
+}
+
+.navbar .logo {
+    height: 150px;
+    margin-left: 10px;
+    
+}
+
+.profile {
+    position: relative;
+    display: inline-block;
+}
+
+.profile img{
+    height: 90px;
+    border-radius: 50%;
+    border: 1.5px solid black;
+    position: relative;
+    margin-right: 45px;
+}
+
+.profile img:hover {
+    border: 1px solid white;
+}
+
+.searchbar{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-left: 50px;
+}
+
+.searchbar input {
+    width: 600px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    
+}
+
+.searchbar button{
+    height: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.nav-links {
+    list-style-type: none; /* Tira as bolinhas de topico da lista*/
+    margin: 30px;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li a {
+    color: rgb(75, 80, 81);
+    text-decoration: none;
+    background-color: #9FD4D4;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.nav-links li a:hover {
+    background-color: #EBEBEB;
+    border-radius: 5px;
+}
+
+.dropdown-categorias-menu{
+    position: absolute;
+    box-shadow: 0 0 2px black;
+    display: none;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.dropdown-categorias-menu a{
+    display: block;
+    color: black;
+    border-bottom: 1px solid #f1f1f1;
+    text-decoration: none;
+    padding: 12px 16px;
+}
+
+.dropdown-categorias-menu a:hover {
+    background-color: #ddd;
+}
+
+.dropdown-categorias:hover .dropdown-categorias-menu{
+    display: block;
+}
+
+.dropdown-foto {
+    display: none; 
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 0 2px black;
+    border-radius: 4px;
+
+}
+
+.dropdown-foto a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.dropdown-foto a:hover {
+    background-color: #ddd;
+}
+
+.profile:hover .dropdown-foto {
+    display: block;
+}
+
+.container{
+ 
+    background-color: #EBEBEB;
+    height: calc(100vh-150px);
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 8vh;
+    margin-left: 4vw;
+    margin-right: 4vw;
+    max-width: 100%;
+}
+
+.imagens{
+    display: flex;
+    flex-direction: column;
+    
+    margin-left: 4%;
+    padding-top: 4%;
+}
+
+.primeira-fileira{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: center;
+}
+
+.imagensLivros{
+    margin: 5%;
+}
+
+
+
+.imagens img{
+    height: 33vh;
+    width: 12vw;
+    margin-right: 4vw;
+    
+} 
+.primeira-fileira{
+    padding-bottom: 8vh;
+}
+.segunda-fileira{
+    padding-bottom: 0;
+}
+
+.navbar {
+    background-color:  #15A6A3;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    padding: 10px 20px;
+    
+    box-sizing: border-box;
+    
+}
+
+.navbar .logo {
+    height: 150px;
+    margin-left: 10px;
+    
+}
+
+.profile {
+    position: relative;
+    display: inline-block;
+}
+
+.profile img{
+    height: 90px;
+    border-radius: 50%;
+    border: 1.5px solid black;
+    position: relative;
+    margin-right: 45px;
+    
+}
+
+.profile img:hover {
+    border: 1px solid white;
+}
+
+.searchbar input {
+    width: 600px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    position: relative;
+    margin-left: 50px;
+}
+
+.nav-links {
+    list-style-type: none; /* Tira as bolinhas de topico da lista*/
+    margin: 30px;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li a {
+    color: rgb(75, 80, 81);
+    text-decoration: none;
+}
+
+.nav-links li a:hover {
+    background-color: #EBEBEB;
+    border-radius: 5px;
+}
+
+.dropdown-categorias-menu{
+    position: absolute;
+    box-shadow: 0 0 2px black;
+    display: none;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.dropdown-categorias-menu a{
+    display: block;
+    color: black;
+    border-bottom: 1px solid #f1f1f1;
+    text-decoration: none;
+    padding: 12px 16px;
+}
+
+.dropdown-categorias-menu a:hover {
+    background-color: #ddd;
+}
+
+.dropdown-categorias:hover .dropdown-categorias-menu{
+    display: block;
+}
+
+.dropdown-foto {
+    display: none; 
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 0 2px black;
+    border-radius: 4px;
+
+}
+
+.dropdown-foto a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.dropdown-foto a:hover {
+    background-color: #ddd;
+}
+
+.profile:hover .dropdown-foto {
+    display: block;
+}
+
+.livro-titulo {
+    text-align: center;
+    margin: 5%;
+}
+
+.livro-titulo img{
+    border-radius: 10px;
+    height: 33vh;
+    width: 12vw;
+    margin-bottom: 10px;
+}
+
+.livro-titulo img:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+
+
+.livro-item label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+}
+

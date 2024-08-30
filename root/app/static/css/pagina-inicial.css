@@ -1,0 +1,212 @@
+body {
+    background-color: #9FD4D4;
+    font-family: "Montserrat";
+}
+
+
+.navbar {
+    background-color:  #15A6A3;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    position: relative;
+    bottom: 10px;
+    right: 10px;
+    
+}
+
+.navbar .logo {
+    height: 150px;
+    margin-left: 10px;
+}
+
+.profile {
+    position: relative;
+    display: inline-block;
+}
+
+.profile img{
+    height: 90px;
+    border-radius: 50%;
+    border: 1.5px solid black;
+    position: relative;
+    margin-right: 45px;
+}
+
+.profile img:hover {
+    border: 1px solid white;
+}
+
+.searchbar{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-left: 50px;
+}
+
+.searchbar input {
+    width: 600px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.searchbar button{
+    height: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.nav-links {
+    list-style-type: none; /* Tira as bolinhas de topico da lista*/
+    margin: 30px;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li a {
+    color: rgb(75, 80, 81);
+    text-decoration: none;
+    background-color: #9FD4D4;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.nav-links li a:hover {
+    background-color: #fefdfd;
+    border-radius: 5px;
+}
+
+.dropdown-categorias-menu{
+    position: absolute;
+    box-shadow: 0 0 2px black;
+    display: none;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.dropdown-categorias-menu a{
+    display: block;
+    color: black;
+    border-bottom: 1px solid #f1f1f1;
+    text-decoration: none;
+    padding: 12px 16px;
+}
+
+.dropdown-categorias-menu a:hover {
+    background-color: #ddd;
+}
+
+.dropdown-categorias:hover .dropdown-categorias-menu{
+    display: block;
+}
+
+.dropdown-foto {
+    display: none; 
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 0 2px black;
+    border-radius: 4px;
+
+}
+
+.dropdown-foto a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.dropdown-foto a:hover {
+    background-color: #ddd;
+}
+
+.profile:hover .dropdown-foto {
+    display: block;
+}
+
+.row {
+
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #EBEBEB;
+    border-radius:10px;
+   /* width: 100%;*/
+   margin-top: 50px;
+    height: 250px;
+
+}
+
+
+
+.tutorial-row{
+    justify-content: space-between;
+}
+
+.tutorial-text {
+    text-align: center;
+    font-size: 20px;
+
+}
+
+.books-row {
+    margin-top: 20px;
+     padding: 15px 0px;
+     overflow-x: scroll;
+     display: flex;
+     flex-direction: row;
+     width: 100%;
+
+
+}
+
+.books-row::-webkit-scrollbar {
+    display: none;
+}
+
+.book-img {
+    height: 150px;
+    width: auto;
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+
+.book-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+    text-align: left;
+}
+
+.book-img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.arrow-button-left {
+    padding: 10px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.arrow-button-right {
+    padding: 10px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
