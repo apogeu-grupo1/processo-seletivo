@@ -138,14 +138,12 @@ def loginPost():
         return redirect(url_for('homepage'))
 
 @app.route('/', methods=['GET'])
-def homepage():
-    login_token = session['login_token']
-    print(login_token)
-    if login_token:
-        return f'O valor do token de login é: {login_token}'
+def homepage():    
+    if 'login_token' in session and session['login_token']:
+        login_token = session['login_token'] # servir token pra pagina inicial
     else:
-        return 'Token de login não encontrado na sessão!'
-    #return "Bem-vindo à página inicial!"
+        return redirect(url_for('loginGet'))
+    
 
 if __name__ == '__main__':
     init_db()
