@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Instância de Livro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='pagina-cadastro_instancia\css\cadastro_instancia.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastrar nova instância de Livro</h1>
+        <div class="allInputsContainer">
+            <div class="inputs1Container">
+                <div class="uuidInstanciaContainer">
+                    <label for="instancia_id">UUID da Instância:</label>
+                    <input type="text" id="instancia_id" name="instancia_id" required>
+                </div>
+                
+                <div class="uuidLivroContainer">
+                    <label for="livro_id">UUID do Livro:</label>
+                    <input type="text" id="livro_id" name="livro_id" required>
+                </div>
+                
+                <div class="uuidGeneroContainer">
+                    <label for="genero_id">UUID do Gênero:</label>
+                    <input type="text" id="genero_id" name="genero_id" required>
+                </div>
+                
+                <div class="statusContainer">
+                    <label for="status">Status:</label>
+                    <input type="text" id="status" name="status" required>
+                </div>
+            </div><!--inputs1Container-->
+            <div class="botaoInteiro">
+                <button class="botaoDeCadastro" type="submit">Cadastrar Instância</button>
+            </div>
+        </div>
+    </div><!--container-->
+</body>
+</html>
