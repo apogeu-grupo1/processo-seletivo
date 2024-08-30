@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Instancia</title>
-    <link rel="stylesheet" href="instancia.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='pagina-instancia/css/instancia.css') }}">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
             <a href="index.html">
-                <img src="./img/logo.png" alt="Logo", height="150"> <!-- Mudar a logo depois -->
+                <img src="{{ url_for('static', filename='pagina-instancia/img/logo.png') }}" alt="Logo", height="150"> <!-- Mudar a logo depois -->
             </a>
         </div>
 
@@ -31,7 +31,7 @@
         </ul>
         <div class="profile">
             <a href="#perfil"></a>
-                <img src="./img/foto-perfil.png" alt="Perfil", height="80">
+                <img src="{{ url_for('static', filename='pagina-instancia/img/foto-perfil.png') }}" alt="Perfil", height="80">
             </a>
             <div class="dropdown-foto">
                 <a href="#meuperfil">Meu Perfil</a>
@@ -44,7 +44,7 @@
     <main>
 		<div class="container-instancia">
 			<div class="left-rectangle">
-				<img class= "foto" src="./img/percyjackson.png" alt="Imagem do Livro">
+				<img class= "foto" src="{{ url_for('static', filename='pagina-instancia/img/percyjackson.png') }}" alt="Imagem do Livro">
 			</div>
 			<div class="right-rectangle">
 				<div class="text-content">
@@ -54,7 +54,7 @@
 					<p class="descricao-livro"><strong>Descrição:</strong> Descrição......................</p>
 				</div>
 				<div class="image-content">
-					<img class="foto-perfil" src="./img/foto-perfil.png" alt="Imagem do Dono">
+					<img class="foto-perfil" src="{{ url_for('static', filename='pagina-instancia/img/foto-perfil.png') }}" alt="Imagem do Dono">
 				</div>
 			</div>
 		</div>
