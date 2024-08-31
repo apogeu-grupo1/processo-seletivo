@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Busca de livros</title>
-    <link rel="stylesheet" href="busca-livros.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='pagina-busca/css/busca-livros.css') }}">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
             <a href="index.html">
-                <img src="./img/logo.png" alt="Logo", height="150"> <!-- Mudar a logo depois -->
+                <img src="{{ url_for('static', filename='pagina-busca/img/logo.png') }}" alt="Logo", height="150"> <!-- Mudar a logo depois -->
             </a>
         </div>
 
@@ -31,7 +31,7 @@
         </ul>
         <div class="profile">
             <a href="#perfil"></a>
-                <img src="./img/foto-perfil.png" alt="Perfil", height="80">
+                <img src="{{ url_for('static', filename='pagina-busca/img/foto-perfil.png') }}" alt="Perfil", height="80">
             </a>
             <div class="dropdown-foto">
                 <a href="#meuperfil">Meu Perfil</a>
