@@ -30,6 +30,7 @@ body {
 
 .profile img{
     height: 90px;
+    width: 90px;
     border-radius: 50%;
     border: 1.5px solid black;
     position: relative;
