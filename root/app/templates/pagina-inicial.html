@@ -26,9 +26,9 @@
                 <a href="#categorias">Categorias</a> <!-- Mudar o link de redirecionamento -->
 
                 <div class="dropdown-categorias-menu">
-                    <a href="#categorias1">Categorias 1</a>
-                    <a href="#categorias2">Categorias 2</a>
-                    <a href="#categorias3">Categorias 3</a>
+                    <a href="#categorias1">{{lista_generos[0]}}</a>
+                    <a href="#categorias2">{{lista_generos[1]}}</a>
+                    <a href="#categorias3">{{lista_generos[2]}}</a>
                 </div>
             </li>
         </ul>
@@ -47,6 +47,8 @@
 
     <div>
     	
+        
+        <h2 class="nome-genero">{{lista_generos[0]}}</h2>
         <div class="row">
             <button class="arrow-button-left" onclick="scrollRowLeft('books-row-1')"></button>
             <div id="books-row-1" class="books-row">
@@ -55,20 +57,19 @@
                 <div class="book-container">
                     <a href="">
 						<img src="{{ item.foto }}"  alt="{{item.nome}}" class="book-img">
+                        <p class="titulo-livro">{{ item.nome }}</p>
 					</a>
                 </div>
                 {% endfor %}
             </div>
 
             <button class="arrow-button-right" onclick="scrollRowRight('books-row-1')"></button>
-            
-
-            
         </div>
 
 
     
         
+        <h2 class="nome-genero">{{lista_generos[1]}}</h2>
         <div class="row">
             <button class="arrow-button-left" onclick="scrollRowLeft('books-row-2')"></button>
             <div id="books-row-2" class="books-row">
@@ -77,17 +78,16 @@
                 <div class="book-container">
                     <a id="livros" href="">
 						<img src="{{ item.foto }}"  alt="{{item.nome}}" class="book-img">
+                        <p class="titulo-livro">{{ item.nome }}</p>
 					</a>
-                    <label for="livros">{{ item.titulo }}</label>
                 </div>
                 {% endfor %}
             </div>
             <button class="arrow-button-right" onclick="scrollRowRight('books-row-2')"></button>
-            
-            
         </div>
 
 
+        <h2 class="nome-genero">{{lista_generos[2]}}</h2>
         <div class="row">
             <button class="arrow-button-left" onclick="scrollRowLeft('books-row-3')"></button>
             <div id="books-row-2" class="books-row">
@@ -96,13 +96,12 @@
                 <div class="book-container">
                     <a href="">
 						<img src="{{ item.foto }}" alt="{{item.nome}}" class="book-img">
+                        <p class="titulo-livro">{{ item.nome }}</p>
 					</a>
                 </div>
                 {% endfor %}
             </div>
             <button class="arrow-button-right" onclick="scrollRowRight('books-row-3')"></button>
-            
-            
         </div>
 
     </div>

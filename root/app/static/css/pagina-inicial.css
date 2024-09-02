@@ -15,7 +15,7 @@ body {
     position: relative;
     bottom: 10px;
     right: 10px;
-    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .logo {
@@ -142,7 +142,7 @@ body {
     background-color: #EBEBEB;
     border-radius:10px;
    /* width: 100%;*/
-   margin-top: 50px;
+   margin-top: 0;
     height: 250px;
 
 }
@@ -178,21 +178,52 @@ body {
     height: 150px;
     width: auto;
     padding: 10px 10px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .book-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: space-between;
-    text-align: left;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    width: 150px;
+    margin: 10px;
+    height: 250px;
+}
+
+.book-container a {
+    text-decoration: none;
+    color: black;
+}
+
+.book-container a:hover {
+    color: #007BFF;
 }
 
 .book-img:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
 }
+
+.titulo-livro {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.2;
+    height: 40px; /* Altura fixa para os títulos */
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.titulo-livro p{
+    text-decoration: none;
+}
+
+.nome-genero{
+    margin-top: 9vh;
+}
+
 
 .arrow-button-left {
     padding: 10px;
@@ -211,3 +242,5 @@ body {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
 }
+
+

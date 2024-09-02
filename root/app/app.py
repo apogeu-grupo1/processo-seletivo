@@ -68,6 +68,17 @@ def get_foto_cliente(cursor, uuid_cliente):
         ''', (uuid_cliente,))
     return cursor.fetchone()
 
+def get_generos_cliente(cursor, cliente_id):
+        cursor.execute('''
+            SELECT "Generos Cliente" 
+            FROM Clientes 
+            WHERE "UUID Cliente" = ?
+        ''', (cliente_id,))
+
+        generos_cliente = cursor.fetchone()
+        return generos_cliente[0].split(", ") if generos_cliente else []
+
+
 # Rotas da aplicação
 @app.route('/', methods=['GET'])
 def homepage():
@@ -143,27 +154,23 @@ def home():
     if not login_token:
         return redirect(url_for('loginPost'))
 
+
+
+    #FUNCAO GET_GENEROS_CLIENTE ***********************************
     with connect_db() as conn:
         cursor = conn.cursor()
-        cursor.execute('''
-            SELECT "Generos Cliente" 
-            FROM Clientes 
-            WHERE "UUID Cliente" = ?
-        ''', (cliente_id,))
-
-        generos_cliente = cursor.fetchone()
-        lista_generos = generos_cliente[0].split(", ") if generos_cliente else []
+        
+        lista_generos = get_generos_cliente(cursor, cliente_id)
         foto_cliente = get_foto_cliente(cursor, cliente_id)[0]
         # Obtenha livros para os gêneros preferidos do cliente
         data_genero = [get_genero_data(cursor, genero) for genero in lista_generos[:3]]
-        print(foto_cliente)
 
     # Preparar os dados para renderização
     data1 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5]} for row in data_genero[0]] if len(data_genero) > 0 else []
     data2 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5]} for row in data_genero[1]] if len(data_genero) > 1 else []
     data3 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5]} for row in data_genero[2]] if len(data_genero) > 2 else []
 
-    return render_template('pagina-inicial.html', data1=data1, data2=data2, data3=data3, foto_cliente=foto_cliente)
+    return render_template('pagina-inicial.html', data1=data1, data2=data2, data3=data3, foto_cliente=foto_cliente, lista_generos=lista_generos)
 
 # Execução da aplicação
 if __name__ == '__main__':
