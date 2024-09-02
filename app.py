@@ -50,8 +50,7 @@ def loginPost():
         if not result:
             return jsonify({'error': 'E-mail não encontrado!'}), 404
 
-        uuid_cliente, hash_senha_armazenada = result
-        print(hash_senha_armazenada)    
+        uuid_cliente, hash_senha_armazenada = result  
         # Verifica se o hash da senha inserida é igual ao hash armazenado
         #hash_senha_inserida = bcrypt.generate_password_hash(password).decode('utf-8')
         hash_senha_inserida = '$2b$12$EjCFeWMMUtA0HHb5Z.Hi9OAIiMLli.SsjRMrACUkU2idA05Ba0lji'
@@ -73,22 +72,86 @@ def loginPost():
 @app.route('/', methods=['GET'])
 def homepage():    
     if 'login_token' in session and session['login_token']:
-        login_token = session['login_token'] # servir token pra pagina inicial
-        return "Olá mundo!"
+        login_token = session['login_token']
+        
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            
+            # Buscar o cliente com o token armazenado
+            cursor.execute('''SELECT "UUID Cliente" FROM Clientes WHERE "Login Token" = ?''', (login_token,))
+            result = cursor.fetchone()
+            if result:
+                # Token é válido e encontrado no banco de dados
+                return "Olá mundo!"
+            else:
+                # Token inválido, redirecionar para a página de login
+                return redirect(url_for('loginPost'))
     else:
+        # Sem token na sessão, redirecionar para a página de login
         return redirect(url_for('loginPost'))
 
 @app.route('/perfil', methods=['GET'])
 def perfilGet():
-    return render_template('perfil.html')
+    if 'login_token' in session and session['login_token']:
+        login_token = session['login_token']
+        
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            
+            # Buscar o cliente com o token armazenado
+            cursor.execute('''SELECT "UUID Cliente" FROM Clientes WHERE "Login Token" = ?''', (login_token,))
+            result = cursor.fetchone()
+            if result:
+                # Token é válido e encontrado no banco de dados
+                return render_template('perfil.html')
+            else:
+                # Token inválido, redirecionar para a página de login
+                return redirect(url_for('loginPost'))
+    else:
+        # Sem token na sessão, redirecionar para a página de login
+        return redirect(url_for('loginPost'))
 
 @app.route('/instancia', methods=['GET'])
 def instanciaGet():
-    return render_template('instancia.html')
+    if 'login_token' in session and session['login_token']:
+        login_token = session['login_token']
+        
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            
+            # Buscar o cliente com o token armazenado
+            cursor.execute('''SELECT "UUID Cliente" FROM Clientes WHERE "Login Token" = ?''', (login_token,))
+            result = cursor.fetchone()
+            if result:
+                # Token é válido e encontrado no banco de dados
+                return render_template('instancia.html')
+            else:
+                # Token inválido, redirecionar para a página de login
+                return redirect(url_for('loginPost'))
+    else:
+        # Sem token na sessão, redirecionar para a página de login
+        return redirect(url_for('loginPost'))
 
 @app.route('/busca-livros', methods=['GET'])
 def buscaGet():
-    return render_template('busca-livros.html')
+    if 'login_token' in session and session['login_token']:
+        login_token = session['login_token']
+        
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            
+            # Buscar o cliente com o token armazenado
+            cursor.execute('''SELECT "UUID Cliente" FROM Clientes WHERE "Login Token" = ?''', (login_token,))
+            result = cursor.fetchone()
+            if result:
+                # Token é válido e encontrado no banco de dados
+                return render_template('busca-livros.html')
+            else:
+                # Token inválido, redirecionar para a página de login
+                return redirect(url_for('loginPost'))
+    else:
+        # Sem token na sessão, redirecionar para a página de login
+        return redirect(url_for('loginPost'))
 
 if __name__ == '__main__':
     init_db()
