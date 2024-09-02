@@ -26,9 +26,9 @@
                 <a href="#categorias">Categorias</a> <!-- Mudar o link de redirecionamento -->
 
                 <div class="dropdown-categorias-menu">
-                    <a href="#categorias1">Categorias 1</a>
-                    <a href="#categorias2">Categorias 2</a>
-                    <a href="#categorias3">Categorias 3</a>
+                    {% for item in lista_generos %}
+                    <a href="#categorias1">{{item}}</a>
+                    {% endfor %}
                 </div>
             </li>
         </ul>

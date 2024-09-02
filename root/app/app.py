@@ -78,6 +78,10 @@ def get_generos_cliente(cursor, cliente_id):
         generos_cliente = cursor.fetchone()
         return generos_cliente[0].split(", ") if generos_cliente else []
 
+def get_all_generos(cursor):
+    cursor.execute('SELECT "Nome Genero" FROM Generos')
+    return cursor.fetchall()
+
 
 # Rotas da aplicação
 @app.route('/', methods=['GET'])
@@ -139,12 +143,13 @@ def search():
     with connect_db() as conn:
         cursor = conn.cursor()
         foto_cliente = get_foto_cliente(cursor,cliente_id)[0]
+        lista_generos = get_all_generos(cursor)
 
     query = request.args.get('q')
     rows = search_books(query)
     data = [{"titulo": row[0], "autor": row[1], "isbn": row[2], "descricao": row[3], "foto": row[4]} for row in rows]
     
-    return render_template('busca-livros.html', data=data, foto_cliente=foto_cliente)
+    return render_template('busca-livros.html', data=data, foto_cliente=foto_cliente,lista_generos=lista_generos)
 
 @app.route('/home')
 def home():
@@ -164,13 +169,14 @@ def home():
         foto_cliente = get_foto_cliente(cursor, cliente_id)[0]
         # Obtenha livros para os gêneros preferidos do cliente
         data_genero = [get_genero_data(cursor, genero) for genero in lista_generos[:3]]
+        all_generos = get_all_generos(cursor)
 
     # Preparar os dados para renderização
     data1 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5]} for row in data_genero[0]] if len(data_genero) > 0 else []
     data2 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5]} for row in data_genero[1]] if len(data_genero) > 1 else []
     data3 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5]} for row in data_genero[2]] if len(data_genero) > 2 else []
 
-    return render_template('pagina-inicial.html', data1=data1, data2=data2, data3=data3, foto_cliente=foto_cliente, lista_generos=lista_generos)
+    return render_template('pagina-inicial.html', data1=data1, data2=data2, data3=data3, foto_cliente=foto_cliente, lista_generos=lista_generos, all_generos=all_generos)
 
 # Execução da aplicação
 if __name__ == '__main__':
