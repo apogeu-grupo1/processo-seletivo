@@ -1,3 +1,4 @@
+import datetime
 from flask import Flask, render_template, request, jsonify, redirect, session, url_for
 from flask_bcrypt import Bcrypt
 import sqlite3
@@ -95,6 +96,14 @@ def get_data_instancia(cursor, uuid_instancia):
         ''', (uuid_instancia,))
     
     return cursor.fetchall()
+
+def getBooks(cursor):
+    cursor.execute('SELECT "Nome Livro" FROM Livros')
+    return cursor.fetchall()
+
+def getUuidBook(cursor,livro):
+    cursor.execute('SELECT "UUID Livro" FROM Livros WHERE "Nome Livro"=?', (livro,))
+    return cursor.fetchone()
 
 
 # Rotas da aplicação
@@ -205,7 +214,42 @@ def books(UUID_Instancia):
     
     return render_template('instancia.html', data_Instancia=data_Instancia, foto_cliente=foto_cliente, all_generos=all_generos)
 
+@app.route('/cadastro_instancia', methods=['GET'])
+def cadastro_instanciaGet():
+    login_token = session.get('login_token')
+    
+    if not login_token:
+        return redirect(url_for('loginPost'))
+    
+    with sqlite3.connect(DATABASE) as conn:
+        cursor = conn.cursor()
+        livros = getBooks(cursor)
+    print(livros)
+    return render_template('cadastro_instancia.html', livros= livros)
 
+@app.route('/cadastro_instancia', methods=['POST'])
+def cadastro_instanciaPost():
+    cliente_id = session.get('cliente_id')
+    
+    dataCadastro = request.json
+    nome_livro = dataCadastro['livro_nome']
+    data_atual = datetime.datetime.now()
+    uuid_cliente = cliente_id
+    data_cadastro_instancia = data_atual.strftime("%d/%m/%Y")
+    status_instancia = dataCadastro['status']
+    #imagem_instancia = request.files['imagem'].read() if 'imagem' in request.files else None
+    
+    with sqlite3.connect(DATABASE) as conn:
+        cursor = conn.cursor()
+        uuid_livro = getUuidBook(cursor,nome_livro)
+        cursor.execute('''INSERT INTO Instancias ("UUID Livro", "UUID Cliente", "Data Cadastro Instancia", "Status instancia")
+                            VALUES (?, ?, ?, ?)''', (uuid_livro[0], uuid_cliente, data_cadastro_instancia, status_instancia))
+        conn.commit()
+        livros = getBooks(cursor)
+        uuid_instancia = cursor.lastrowid
+        
+
+    return redirect(url_for('books', UUID_Instancia=uuid_instancia))
 
 # Execução da aplicação
 if __name__ == '__main__':
