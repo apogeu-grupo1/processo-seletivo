@@ -53,10 +53,11 @@ def search_books(query=None):
 
 def get_genero_data(cursor, nome_genero):
     cursor.execute('''
-            SELECT Livros."UUID Livro", Livros."Nome Livro", Livros."Autor Livro", Livros."ISBN Livro", Livros."Descricao do Livro", Livros."Foto Capa"
-            FROM Livros
+            SELECT Livros."UUID Livro", Livros."Nome Livro", Livros."Autor Livro", Livros."ISBN Livro", Livros."Descricao do Livro", Livros."Foto Capa",Instancias."UUID Instancia"
+            FROM Instancias
+            JOIN Livros ON Instancias."UUID Livro" = Livros."UUID Livro"
             JOIN Generos ON Livros."UUID Genero" = Generos."UUID Genero"
-            WHERE Generos."Nome Genero" = ?;
+            WHERE Generos."Nome Genero" = ? AND Instancias."Status Instancia" = 'Disponível';
         ''', (nome_genero,))
     return cursor.fetchall()
 
@@ -76,10 +77,23 @@ def get_generos_cliente(cursor, cliente_id):
         ''', (cliente_id,))
 
         generos_cliente = cursor.fetchone()
+        
         return generos_cliente[0].split(", ") if generos_cliente else []
 
 def get_all_generos(cursor):
     cursor.execute('SELECT "Nome Genero" FROM Generos')
+    return cursor.fetchall()
+
+def get_data_instancia(cursor, uuid_instancia):
+    cursor.execute('''
+            SELECT Livros."Nome Livro", Livros."Autor Livro", Livros."Descricao do Livro", Livros."Foto Capa", Generos."Nome Genero", Instancias."UUID Instancia", Clientes."Foto CLiente"
+            FROM Instancias
+            JOIN Livros ON Instancias."UUID Livro" = Livros."UUID Livro"
+            JOIN Generos ON Livros."UUID Genero" = Generos."UUID Genero"
+            JOIN Clientes ON Instancias."UUID Cliente" = Clientes."UUID Cliente"
+            WHERE Instancias."UUID Instancia" = ?;
+        ''', (uuid_instancia,))
+    
     return cursor.fetchall()
 
 
@@ -159,8 +173,6 @@ def home():
     if not login_token:
         return redirect(url_for('loginPost'))
 
-
-
     #FUNCAO GET_GENEROS_CLIENTE ***********************************
     with connect_db() as conn:
         cursor = conn.cursor()
@@ -172,11 +184,28 @@ def home():
         all_generos = get_all_generos(cursor)
 
     # Preparar os dados para renderização
-    data1 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5]} for row in data_genero[0]] if len(data_genero) > 0 else []
-    data2 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5]} for row in data_genero[1]] if len(data_genero) > 1 else []
-    data3 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5]} for row in data_genero[2]] if len(data_genero) > 2 else []
+    data1 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5], "uuid_instancia": row[6]} for row in data_genero[0]] if len(data_genero) > 0 else []
+    data2 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5], "uuid_instancia": row[6]} for row in data_genero[1]] if len(data_genero) > 1 else []
+    data3 = [{"id": row[0], "nome": row[1], "autor": row[2], "ISBN": row[3], "descricao": row[4], "foto": row[5], "uuid_instancia": row[6]} for row in data_genero[2]] if len(data_genero) > 2 else []
 
     return render_template('pagina-inicial.html', data1=data1, data2=data2, data3=data3, foto_cliente=foto_cliente, lista_generos=lista_generos, all_generos=all_generos)
+
+@app.route('/books/<UUID_Instancia>')
+def books(UUID_Instancia):
+    cliente_id = session.get('cliente_id')
+    
+    with connect_db() as conn:
+        cursor = conn.cursor()
+        
+        data = get_data_instancia(cursor, UUID_Instancia)
+        foto_cliente = get_foto_cliente(cursor,cliente_id)[0]
+        all_generos = get_all_generos(cursor)
+        data_Instancia = [{"nome_livro": row[0], "autor_livro": row[1], "descricao_livro": row[2], "foto_livro": row[3], "genero_livro": row[4], "uuid_instancia": row[5], "foto_cliente": row[6]} for row in data]
+    
+    
+    return render_template('instancia.html', data_Instancia=data_Instancia, foto_cliente=foto_cliente, all_generos=all_generos)
+
+
 
 # Execução da aplicação
 if __name__ == '__main__':
