@@ -1,5 +1,5 @@
 import datetime
-from flask import Flask, render_template, request, jsonify, redirect, session, url_for
+from flask import Flask, flash, render_template, request, jsonify, redirect, session, url_for
 from flask_bcrypt import Bcrypt
 import sqlite3
 import os
@@ -44,12 +44,13 @@ def search_books(query=None):
         cursor = conn.cursor()
         if query:
             cursor.execute('''
-                SELECT "Nome Livro", "Autor Livro", "ISBN Livro", "Descricao do Livro", "Foto Capa" 
-                FROM Livros 
-                WHERE "Nome Livro" LIKE ? OR "Autor Livro" LIKE ?
+                SELECT Livros."Nome Livro", Livros."Autor Livro", Livros."ISBN Livro", Livros."Descricao do Livro", Livros."Foto Capa", Instancias."UUID Instancia" 
+                FROM Instancias
+                JOIN Livros ON Instancias."UUID Livro" = Livros."UUID Livro" 
+                WHERE "Nome Livro" LIKE ? OR "Autor Livro" LIKE ? AND Instancias."Status Instancia" = 'Disponível';
             ''', ('%' + query + '%', '%' + query + '%'))
         else:
-            cursor.execute('SELECT "Nome Livro", "Autor Livro", "ISBN Livro", "Descricao do Livro", "Foto Capa" FROM Livros')
+            cursor.execute('SELECT Livros."Nome Livro", Livros."Autor Livro", Livros."ISBN Livro", Livros."Descricao do Livro", Livros."Foto Capa", Instancias."UUID Instancia" FROM Instancias JOIN Livros ON Instancias."UUID Livro" = Livros."UUID Livro" ')
         return cursor.fetchall()
 
 def get_genero_data(cursor, nome_genero):
@@ -87,7 +88,7 @@ def get_all_generos(cursor):
 
 def get_data_instancia(cursor, uuid_instancia):
     cursor.execute('''
-            SELECT Livros."Nome Livro", Livros."Autor Livro", Livros."Descricao do Livro", Livros."Foto Capa", Generos."Nome Genero", Instancias."UUID Instancia", Clientes."Foto CLiente"
+            SELECT Livros."Nome Livro", Livros."Autor Livro", Livros."Descricao do Livro", Livros."Foto Capa", Generos."Nome Genero", Instancias."UUID Instancia", Clientes."Foto CLiente", Clientes."UUID CLiente"
             FROM Instancias
             JOIN Livros ON Instancias."UUID Livro" = Livros."UUID Livro"
             JOIN Generos ON Livros."UUID Genero" = Generos."UUID Genero"
@@ -105,6 +106,14 @@ def getUuidBook(cursor,livro):
     cursor.execute('SELECT "UUID Livro" FROM Livros WHERE "Nome Livro"=?', (livro,))
     return cursor.fetchone()
 
+def get_minhas_instancias(cursor, uuid_cliente):
+    cursor.execute('''
+            SELECT Livros."Nome Livro", Instancias."UUID Instancia"
+            FROM Instancias
+            JOIN Livros ON Instancias."UUID Livro" = Livros."UUID Livro"
+            WHERE Instancias."UUID CLiente" = ?
+        ''', (uuid_cliente,))
+    return cursor.fetchall()
 
 # Rotas da aplicação
 @app.route('/', methods=['GET'])
@@ -170,7 +179,7 @@ def search():
 
     query = request.args.get('q')
     rows = search_books(query)
-    data = [{"titulo": row[0], "autor": row[1], "isbn": row[2], "descricao": row[3], "foto": row[4]} for row in rows]
+    data = [{"titulo": row[0], "autor": row[1], "isbn": row[2], "descricao": row[3], "foto": row[4], "uuid_instancia": row[5]} for row in rows]
     
     return render_template('busca-livros.html', data=data, foto_cliente=foto_cliente,lista_generos=lista_generos)
 
@@ -199,20 +208,46 @@ def home():
 
     return render_template('pagina-inicial.html', data1=data1, data2=data2, data3=data3, foto_cliente=foto_cliente, lista_generos=lista_generos, all_generos=all_generos)
 
-@app.route('/books/<UUID_Instancia>')
+@app.route('/books/<UUID_Instancia>', methods=['GET', 'POST'])
 def books(UUID_Instancia):
     cliente_id = session.get('cliente_id')
     
     with connect_db() as conn:
         cursor = conn.cursor()
+
+        if request.method == 'POST':
+            
+            uuid_instancia_livro_2 = request.form['livro_nome']
+            uuid_instancia_livro_1 = request.form['uuid_instancia_livro_1']
+            data_atual = datetime.datetime.now()
+            data_cadastro_troca = data_atual.strftime("%d/%m/%Y")
+
+            try:
+            
+                cursor.execute('''
+                    INSERT INTO Transações ("UUID Instancia livro1", "UUID Instancia livro2", "Data Transaçao","Status Transacao")
+                    VALUES (?, ?, ?, ?)
+                ''', (uuid_instancia_livro_1, uuid_instancia_livro_2, data_cadastro_troca, 'Pendente'))
+            
+                conn.commit()
+
+                flash('Proposta de troca enviada com sucesso!', 'success')
+            except Exception as e:
+                # Define uma mensagem de erro
+                flash('Erro ao enviar a proposta de troca. Tente novamente.', 'danger')
+                print(e)
+
+            
+            return redirect(url_for('books', UUID_Instancia=UUID_Instancia))
+
         
         data = get_data_instancia(cursor, UUID_Instancia)
-        foto_cliente = get_foto_cliente(cursor,cliente_id)[0]
+        foto_cliente = get_foto_cliente(cursor, cliente_id)[0]
         all_generos = get_all_generos(cursor)
-        data_Instancia = [{"nome_livro": row[0], "autor_livro": row[1], "descricao_livro": row[2], "foto_livro": row[3], "genero_livro": row[4], "uuid_instancia": row[5], "foto_cliente": row[6]} for row in data]
+        client_books = get_minhas_instancias(cursor, cliente_id)
+        data_Instancia = [{"nome_livro": row[0], "autor_livro": row[1], "descricao_livro": row[2], "foto_livro": row[3], "genero_livro": row[4], "uuid_instancia": row[5], "foto_cliente": row[6], "uuid_cliente": row[7]} for row in data]
     
-    
-    return render_template('instancia.html', data_Instancia=data_Instancia, foto_cliente=foto_cliente, all_generos=all_generos)
+    return render_template('instancia.html', data_Instancia=data_Instancia, foto_cliente=foto_cliente, all_generos=all_generos, client_books=client_books)
 
 @app.route('/cadastro_instancia', methods=['GET'])
 def cadastro_instanciaGet():

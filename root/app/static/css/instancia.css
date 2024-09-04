@@ -176,7 +176,7 @@ main {
 
 
 .right-rectangle .text-content .descricao-livro {
-    margin-top: 100px;
+    margin-top: 0;
 }
 
 .text-content {
@@ -195,4 +195,87 @@ main {
     margin-top: 50px;
     border-radius: 50%;
     border: 1.5px solid black;
+}
+
+
+
+.troca-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 15vh;
+}
+
+.troca-container form{
+    display: flex;
+    flex-direction: row;
+}
+
+.troca-container select{
+    width: 20vw;
+    height: 6vh;
+    border-radius: 10px;
+    margin-bottom: 4vh;
+} 
+
+.troca-container label{
+    font-size: 18px;
+}
+
+.botao-troca button{
+    margin-top: 3vh;
+    margin-left: 1vw;
+    width: 20vw;
+    height: 6vh;
+    border-radius: 20px;
+    background-color:#15A6A3;
+    font-size: 18px;
+    border: none;
+}
+
+.botao-troca button:hover{
+    background-color: #6ed3d4;
+}
+
+.flash-messages {
+    z-index: 1000;
+    position: relative;
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.flash-messages .alert {
+    opacity: 1;
+    animation: fadeOut 5s ease-in forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }

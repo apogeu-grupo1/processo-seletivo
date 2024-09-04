@@ -50,7 +50,7 @@
             <div class="primeira-fileira">
                 {% for item in data %}
                 <div class="livro-titulo">
-                    <a href="#" class="imagensLivros"><img src="{{ item.foto }}" alt="{{ item.titulo }}"></a>
+                    <a href="/books/{{item.uuid_instancia}}" class="imagensLivros"><img src="{{ item.foto }}" alt="{{ item.titulo }}"></a>
                     <label for="imagensLivros">{{ item.titulo }}</label>
                 </div>
                 {% endfor %}

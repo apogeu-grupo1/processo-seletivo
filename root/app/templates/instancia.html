@@ -43,6 +43,20 @@
             </div>
         </div>
     </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+
+
     {% set item = data_Instancia[0] %}
     <main>
 		<div class="container-instancia">
@@ -55,10 +69,31 @@
 					<p><strong>Autor:</strong> {{ item.autor_livro }}</p>
 					<p><strong>Gênero:</strong> {{ item.genero_livro }}</p>
 					<p class="descricao-livro"><strong>Descrição:</strong> {{ item.descricao_livro }}</p>
+                    <div class="troca-container">
+                        <form action="{{ url_for('books', UUID_Instancia=item.uuid_instancia) }}" method="POST">
+                            <div class="opcoesTroca">
+                                <label for="livro_nome">Selecione o livro que deseja trocar:</label>
+                                <select id="livro_nome" name="livro_nome" required>
+                                    {% for livro in client_books %}
+                                    <option value="{{ livro[1] }}">{{ livro[0] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input type="hidden" name="uuid_instancia_livro_1" value="{{ item.uuid_instancia }}">
+                            <div class="botao-troca">
+                                <button type="submit">Propor troca</button>
+                            </div>
+                        </form>
+                    </div>
+
 				</div>
-				<div class="image-content">
-					<img class="foto-perfil" src="{{ item.foto_cliente }}" alt="Imagem do Dono">
-				</div>
+                
+                    <div class="image-content">
+                        <img class="foto-perfil" src="{{ item.foto_cliente }}" alt="Imagem do Dono">
+                    </div>
+                    
+                
+
 			</div>
 		</div>
 	</main>
