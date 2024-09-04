@@ -26,10 +26,9 @@ main {
     
 }
 
-.navbar .logo {
-    height: 150px;
-    margin-left: 10px;
-    
+.logo img{
+    height: 100px;
+    margin-left: 40px;
 }
 
 .profile {

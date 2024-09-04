@@ -23,13 +23,14 @@ main {
     position: relative;
     bottom: 10px;
     right: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     
 }
 
-.navbar .logo {
-    height: 150px;
-    margin-left: 10px;
-    
+.logo img{
+    padding-top: 25px;
+    height: 100px;
+    margin-left: 40px;
 }
 
 .profile {
@@ -63,7 +64,6 @@ main {
     border-radius: 5px;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    
 }
 
 .searchbar button{
@@ -89,7 +89,7 @@ main {
 }
 
 .nav-links li a:hover {
-    background-color: #EBEBEB;
+    background-color: #fefdfd;
     border-radius: 5px;
 }
 
@@ -141,7 +141,6 @@ main {
 .profile:hover .dropdown-foto {
     display: block;
 }
-
 .container{
  
     background-color: #EBEBEB;
@@ -151,7 +150,6 @@ main {
     border-radius: 10px;
     padding: 20px;
     box-sizing: border-box;
-    margin-top: 8vh;
     margin-left: 4vw;
     margin-right: 4vw;
     max-width: 100%;
