@@ -23,13 +23,14 @@ main {
     position: relative;
     bottom: 10px;
     right: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     
 }
 
-.navbar .logo {
-    height: 150px;
-    margin-left: 10px;
-    
+.logo img{
+    padding-top: 25px;
+    height: 100px;
+    margin-left: 40px;
 }
 
 .profile {
@@ -63,7 +64,6 @@ main {
     border-radius: 5px;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    
 }
 
 .searchbar button{
@@ -89,32 +89,59 @@ main {
 }
 
 .nav-links li a:hover {
-    background-color: #EBEBEB;
+    background-color: #fefdfd;
     border-radius: 5px;
 }
 
-.dropdown-categorias-menu{
-    position: absolute;
-    box-shadow: 0 0 2px black;
-    display: none;
-    background-color: white;
-    border-radius: 4px;
+.dropdown-categorias {
+    position: relative;
+    cursor: pointer;
 }
 
-.dropdown-categorias-menu a{
+.dropdown-categorias-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra para o dropdown */
+    border-radius: 5px; /* Bordas arredondadas */
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.dropdown-categorias:hover .dropdown-categorias-menu {
+    display: block; /* Mostrar o menu quando o mouse estiver em cima */
+}
+
+.dropdown-categorias-menu a {
     display: block;
-    color: black;
-    border-bottom: 1px solid #f1f1f1;
+    padding: 0px;
+    color: #333;
     text-decoration: none;
-    padding: 12px 16px;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd; /* Separar os itens */
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-categorias-menu a:last-child {
+    border-bottom: none; /* Remover borda do último item */
 }
 
 .dropdown-categorias-menu a:hover {
-    background-color: #ddd;
+    background-color: #f1f1f1; /* Cor de fundo ao passar o mouse */
 }
 
-.dropdown-categorias:hover .dropdown-categorias-menu{
-    display: block;
+/* Transições */
+.dropdown-categorias-menu {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-categorias:hover .dropdown-categorias-menu {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .dropdown-foto {
@@ -141,7 +168,6 @@ main {
 .profile:hover .dropdown-foto {
     display: block;
 }
-
 .container{
  
     background-color: #EBEBEB;
@@ -151,7 +177,6 @@ main {
     border-radius: 10px;
     padding: 20px;
     box-sizing: border-box;
-    margin-top: 8vh;
     margin-left: 4vw;
     margin-right: 4vw;
     max-width: 100%;

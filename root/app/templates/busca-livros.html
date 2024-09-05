@@ -27,20 +27,18 @@
 
                 <div class="dropdown-categorias-menu">
                     {% for item in lista_generos %}
-                    <a href="#categorias1">{{item[0]}}</a>
+                    <a href="search?q={{item}}">{{item}}</a>
                     {% endfor %}
                 </div>
             </li>
         </ul>
         <div class="profile">
-            <a href="#perfil"></a>
+            <a href="/perfil"></a>
                 <img src="{{ foto_cliente }}" alt="Perfil" height="80">
             </a>
             <div class="dropdown-foto">
-                <a href="#meuperfil">Meu Perfil</a>
-                <a href="#amigos">Amigos</a>
-                <a href="#configuracoes">Configurações</a>
-                <a href="#sair">Sair</a>
+                <a href="/perfil">Meu Perfil</a>
+                <a href="/" id="sair-link">Sair</a> <!-- Adiciona um id ao link -->
             </div>
         </div>
     </nav>
@@ -58,4 +56,23 @@
         </div>
     </div>
 </body>
+<script>
+    document.getElementById("sair-link").addEventListener("click", function(event) {
+        event.preventDefault(); // Impede o comportamento padrão do link
+    
+        // Envia uma requisição POST para a rota de logout no Flask
+        fetch('/perfil', { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    // Redireciona o usuário após o logout
+                    window.location.href = "/";
+                } else {
+                    alert("Erro ao tentar sair.");
+                }
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+            });
+    });
+</script>
 </html>
