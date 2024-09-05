@@ -47,8 +47,9 @@ def search_books(query=None):
                 SELECT Livros."Nome Livro", Livros."Autor Livro", Livros."ISBN Livro", Livros."Descricao do Livro", Livros."Foto Capa", Instancias."UUID Instancia" 
                 FROM Instancias
                 JOIN Livros ON Instancias."UUID Livro" = Livros."UUID Livro" 
-                WHERE "Nome Livro" LIKE ? OR "Autor Livro" LIKE ? AND Instancias."Status Instancia" = 'Disponível';
-            ''', ('%' + query + '%', '%' + query + '%'))
+                Join Generos ON Livros."UUID Genero" = Generos."UUID Genero"
+                WHERE "Nome Genero" = ? OR "Nome Livro" LIKE ? OR "Autor Livro" LIKE ? AND Instancias."Status Instancia" = 'Disponível';
+            ''', (query, '%' + query + '%', '%' + query + '%'))
         else:
             cursor.execute('SELECT Livros."Nome Livro", Livros."Autor Livro", Livros."ISBN Livro", Livros."Descricao do Livro", Livros."Foto Capa", Instancias."UUID Instancia" FROM Instancias JOIN Livros ON Instancias."UUID Livro" = Livros."UUID Livro" ')
         return cursor.fetchall()
@@ -84,7 +85,7 @@ def get_generos_cliente(cursor, cliente_id):
 
 def get_all_generos(cursor):
     cursor.execute('SELECT "Nome Genero" FROM Generos')
-    return cursor.fetchall()
+    return [row[0] for row in cursor.fetchall()]
 
 def get_data_instancia(cursor, uuid_instancia):
     cursor.execute('''

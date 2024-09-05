@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ data_Instancia[0].nome_livro }}</title>
+    <title>{{ data_Instancia.nome_livro }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/instancia.css') }}">
 </head>
 <body>
@@ -27,7 +27,7 @@
 
                 <div class="dropdown-categorias-menu"> <!-- Colocar funcao no backend -->
                     {% for item in all_generos %}
-                    <a href="#categorias1">{{ item[0] }}</a>
+                    <a href="/search?q={{ item }}">{{ item }}</a>
                     {% endfor %}
                 </div>
             </li>
@@ -57,18 +57,19 @@
 
 
 
+    {% if data_Instancia %}
     {% set item = data_Instancia[0] %}
     <main>
-		<div class="container-instancia">
-			<div class="left-rectangle">
-				<img class="foto" src="{{item.foto_livro}}" alt="Imagem do Livro">
-			</div>
-			<div class="right-rectangle">
-				<div class="text-content">
-					<h2>{{ item.nome_livro }}</h2>
-					<p><strong>Autor:</strong> {{ item.autor_livro }}</p>
-					<p><strong>Gênero:</strong> {{ item.genero_livro }}</p>
-					<p class="descricao-livro"><strong>Descrição:</strong> {{ item.descricao_livro }}</p>
+        <div class="container-instancia">
+            <div class="left-rectangle">
+                <img class="foto" src="{{ item.foto_livro }}" alt="Imagem do Livro">
+            </div>
+            <div class="right-rectangle">
+                <div class="text-content">
+                    <h2>{{ item.nome_livro }}</h2>
+                    <p><strong>Autor:</strong> {{ item.autor_livro }}</p>
+                    <p><strong>Gênero:</strong> {{ item.genero_livro }}</p>
+                    <p class="descricao-livro"><strong>Descrição:</strong> {{ item.descricao_livro }}</p>
                     <div class="troca-container">
                         <form action="{{ url_for('books', UUID_Instancia=item.uuid_instancia) }}" method="POST">
                             <div class="opcoesTroca">
@@ -78,19 +79,23 @@
                                     <option value="{{ livro[1] }}">{{ livro[0] }}</option>
                                     {% endfor %}
                                 </select>
-                            </div>
-                            <input type="hidden" name="uuid_instancia_livro_1" value="{{ item.uuid_instancia }}">
-                            <div class="botao-troca">
-                                <button type="submit">Propor troca</button>
-                            </div>
-                        </form>
+                                </div>
+                                <input type="hidden" name="uuid_instancia_livro_1" value="{{ item.uuid_instancia }}">
+                                <div class="botao-troca">
+                                    <button type="submit">Propor troca</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-
-				</div>
-                
                     <div class="image-content">
                         <img class="foto-perfil" src="{{ item.foto_cliente }}" alt="Imagem do Dono">
                     </div>
+                </div>
+            </div>
+        </main>
+    {% else %}
+        <p>Instância não encontrada ou não disponível.</p>
+    {% endif %}
                     
                 
 

@@ -27,7 +27,7 @@
 
                 <div class="dropdown-categorias-menu">
                     {% for item in all_generos %}
-                    <a href="#categorias1">{{ item[0] }}</a>
+                    <a href="search?q={{item}}">{{ item }}</a>
                     {% endfor %}
                 </div>
             </li>
