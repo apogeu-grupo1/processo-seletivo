@@ -1,0 +1,342 @@
+body {
+    background-color: #9FD4D4;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    
+}
+
+.navbar {
+    background-color:  #15A6A3;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    position: relative;
+    bottom: 10px;
+    right: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo img{
+    height: 100px;
+    margin-left: 40px;
+}
+
+.profile {
+    position: relative;
+    display: inline-block;
+}
+
+.profile img{
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    border: 1.5px solid black;
+    position: relative;
+    margin-right: 45px;
+}
+
+.profile img:hover {
+    border: 1px solid white;
+}
+
+.searchbar{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-left: 50px;
+}
+
+.searchbar input {
+    width: 600px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.searchbar button{
+    height: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.nav-links {
+    list-style-type: none; /* Tira as bolinhas de topico da lista*/
+    margin: 30px;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li a {
+    color: rgb(75, 80, 81);
+    text-decoration: none;
+    background-color: #9FD4D4;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.nav-links li a:hover {
+    background-color: #fefdfd;
+    border-radius: 5px;
+}
+
+.dropdown-categorias {
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown-categorias-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra para o dropdown */
+    border-radius: 5px; /* Bordas arredondadas */
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.dropdown-categorias:hover .dropdown-categorias-menu {
+    display: block; /* Mostrar o menu quando o mouse estiver em cima */
+}
+
+.dropdown-categorias-menu a {
+    display: block;
+    padding: 0px;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd; /* Separar os itens */
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-categorias-menu a:last-child {
+    border-bottom: none; /* Remover borda do último item */
+}
+
+.dropdown-categorias-menu a:hover {
+    background-color: #f1f1f1; /* Cor de fundo ao passar o mouse */
+}
+
+/* Transições */
+.dropdown-categorias-menu {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-categorias:hover .dropdown-categorias-menu {
+    opacity: 1;
+    transform: translateY(0);
+}
+.dropdown-foto {
+    display: none; 
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 0 2px black;
+    border-radius: 4px;
+
+}
+
+.dropdown-foto a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.dropdown-foto a:hover {
+    background-color: #ddd;
+}
+
+.profile:hover .dropdown-foto {
+    display: block;
+}
+
+/* Estrutura da Página */
+.profile-page {
+    display: flex;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 25%;
+    background-color: #E6F1F1;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.profile-picture img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.profile-options button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #9FD4D4;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.profile-options button:hover {
+    background-color: #8EC4C4;
+}
+
+.friends-list{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+}
+
+.friends-list h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.friend img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.main-content {
+    width: 75%;
+    padding: 20px;
+    margin-left: 20px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.category {
+    margin-bottom: 30px;
+}
+
+.category h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.book-list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.imagem img {
+    width: 100%;
+    height: 150px;
+    box-sizing: border-box;
+}
+
+
+.imagens{
+    display: flex;
+    flex-direction: column;
+    
+    margin-left: 4%;
+    padding-top: 4%;
+}
+
+.primeira-fileira{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: center;
+}
+
+.proposta {
+    display: flex;
+    flex-direction: column; /* Alinha os elementos verticalmente */
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dados-troca {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Ocupa toda a largura disponível */
+}
+
+.dados-troca img {
+    width: 80px;
+    height: 120px;
+    object-fit: cover;
+    margin: 0 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.botoes {
+    margin-top: 15px; /* Espaçamento entre as imagens e os botões */
+    display: flex;
+    justify-content: space-between; /* Mantém os botões espaçados uniformemente */
+    width: 100%; /* Faz os botões ocuparem a mesma largura das imagens */
+}
+
+.botoes button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #9FD4D4;
+    color: white;
+    font-size: 14px;
+    width: 48%; /* Para que os botões ocupem metade da largura */
+}
+
+.botoes button:first-child {
+    background-color: #4CAF50; /* Cor de aceitar */
+}
+
+.botoes button:last-child {
+    background-color: #f44336; /* Cor de recusar */
+}
+
+.botoes button:hover {
+    opacity: 0.8;
+}
+
+
+
+
+
+.imagensLivros{
+    margin: -5%;
+}
+
+
+.imagens img{
+    border-radius: 10px;
+    height: 30vh;
+    width: 10vw;
+    margin-bottom: 10px;
+    
+} 
+
+.imagens img:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}

@@ -33,11 +33,11 @@
             </li>
         </ul>
         <div class="profile">
-            <a href="#perfil"></a>
+            <a href="/perfil"></a>
                 <img src="{{ foto_cliente }}" alt="Perfil" height="80">
             </a>
             <div class="dropdown-foto">
-                <a href="#meuperfil">Meu Perfil</a>
+                <a href="/perfil">Meu Perfil</a>
                 <a href="#configuracoes">Configurações</a>
                 <a href="#sair">Sair</a>
             </div>
@@ -89,6 +89,7 @@
                     </div>
                     <div class="image-content">
                         <img class="foto-perfil" src="{{ item.foto_cliente }}" alt="Imagem do Dono">
+                        <p class="username-cliente">{{ item.username_cliente }}</p>
                     </div>
                 </div>
             </div>

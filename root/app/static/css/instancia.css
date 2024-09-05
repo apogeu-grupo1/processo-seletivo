@@ -261,6 +261,12 @@ main {
     background-color: #6ed3d4;
 }
 
+.username-cliente{
+    font-size: 17px;
+    margin-left: 6.2vw;
+    margin-top: -1px;
+}
+
 .flash-messages {
     z-index: 1000;
     position: relative;

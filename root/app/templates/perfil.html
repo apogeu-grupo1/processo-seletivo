@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/home">
+                <img src="/static/img/logo.png" alt="Logo" height="150"> <!-- Mudar a logo depois -->
+            </a>
+        </div>
+
+        <div class="searchbar">
+            <form action="/search" method="GET">
+                <input type="text" name="q" placeholder="Pesquisar...">
+                <button class="botao-busca" type="submit">Buscar</button>
+            </form>
+        </div>
+
+        <ul class="nav-links">
+            <li class="dropdown-categorias">
+                <a href="#categorias">Categorias</a> <!-- Mudar o link de redirecionamento -->
+
+                <div class="dropdown-categorias-menu">
+                    {% for item in all_generos %}
+                    <a href="search?q={{item}}">{{ item }}</a>
+                    {% endfor %}
+                </div>
+            </li>
+        </ul>
+        <div class="profile">
+            <a href="/perfil"></a>
+                <img src="{{ foto_cliente }}" alt="Perfil" height="80">
+            </a>
+            <div class="dropdown-foto">
+                <a href="/perfil">Meu Perfil</a>
+                <a href="#amigos">Amigos</a>
+                <a href="#configuracoes">Configurações</a>
+                <a href="#sair">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="profile-page">
+        <div class="sidebar">
+            <div class="profile-picture">
+                <img src="{{ foto_cliente }}" alt="Foto do perfil">
+            </div>
+            <div class="propostas-troca">
+                <h2>Minhas propostas</h2>
+                {% if transacao %}
+                {% for item in transacao %}
+                <div class="proposta">
+                    <div class="dados-troca">
+                        <a href="/books/{{ item.uuid_instancia_1 }}">
+                            <img src="{{ item.foto_capa_livro_1 }}" alt="imagem">
+                        </a>
+                        <p>em troca de</p>
+                        <a href="/books/{{ item.uuid_instancia_2 }}">
+                            <img src="{{ item.foto_capa_livro_2 }}" alt="imagem">
+                        </a>
+                    </div>
+                    <div class="botoes">
+                        <button>Aceitar</button>
+                        <button>Recusar</button>
+                    </div>
+                </div>
+               {% endfor %}
+               {% else %}
+               <p>Voce não possui nenhuma proposta de troca</p>
+               {% endif %}
+            </div>
+        </div>
+        <div class="main-content">
+            <h2>Meus Livros</h2>
+            <div class="imagens">
+                <div class="primeira-fileira">
+                    {% for item in data %}
+                    <div class="livro-titulo">
+                        <a href="/books/{{ item[1] }}" class="imagensLivros"><img src="{{ item[2] }}" alt="{{ item[0] }}"></a>
+                        <label for="imagensLivros">{{ item.titulo }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+</html>

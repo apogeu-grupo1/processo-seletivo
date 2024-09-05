@@ -89,7 +89,7 @@ def get_all_generos(cursor):
 
 def get_data_instancia(cursor, uuid_instancia):
     cursor.execute('''
-            SELECT Livros."Nome Livro", Livros."Autor Livro", Livros."Descricao do Livro", Livros."Foto Capa", Generos."Nome Genero", Instancias."UUID Instancia", Clientes."Foto CLiente", Clientes."UUID CLiente"
+            SELECT Livros."Nome Livro", Livros."Autor Livro", Livros."Descricao do Livro", Livros."Foto Capa", Generos."Nome Genero", Instancias."UUID Instancia", Clientes."Foto CLiente", Clientes."UUID CLiente", Clientes."Username Cliente"
             FROM Instancias
             JOIN Livros ON Instancias."UUID Livro" = Livros."UUID Livro"
             JOIN Generos ON Livros."UUID Genero" = Generos."UUID Genero"
@@ -109,12 +109,27 @@ def getUuidBook(cursor,livro):
 
 def get_minhas_instancias(cursor, uuid_cliente):
     cursor.execute('''
-            SELECT Livros."Nome Livro", Instancias."UUID Instancia"
+            SELECT Livros."Nome Livro", Instancias."UUID Instancia", Livros."Foto Capa"
             FROM Instancias
             JOIN Livros ON Instancias."UUID Livro" = Livros."UUID Livro"
             WHERE Instancias."UUID CLiente" = ?
         ''', (uuid_cliente,))
     return cursor.fetchall()
+
+def get_transacoes_data(cursor, uuid_cliente):
+    cursor.execute('''
+            SELECT Transações."UUID Transacao", inst1."UUID Instancia", inst2."UUID Instancia", livros1."Foto Capa", livros2."Foto Capa"
+            FROM Transações
+            JOIN Instancias AS inst1 ON Transações."UUID Instancia livro1" = inst1."UUID Instancia"
+			JOIN Instancias AS inst2 ON Transações."UUID Instancia livro2" = inst2."UUID Instancia"
+			JOIN Livros AS livros1 ON inst1."UUID Livro" = livros1."UUID Livro"
+			JOIN Livros AS livros2 ON inst2."UUID Livro" = livros2."UUID Livro"
+			WHERE inst1."UUID Cliente" = ?
+        ''', (uuid_cliente,))
+    
+    rows = cursor.fetchall()
+    data = [{"uuid_transacao": row[0], "uuid_instancia_1": row[1], "uuid_instancia_2": row[2], "foto_capa_livro_1": row[3], "foto_capa_livro_2": row[4]} for row in rows]
+    return data
 
 # Rotas da aplicação
 @app.route('/', methods=['GET'])
@@ -246,7 +261,7 @@ def books(UUID_Instancia):
         foto_cliente = get_foto_cliente(cursor, cliente_id)[0]
         all_generos = get_all_generos(cursor)
         client_books = get_minhas_instancias(cursor, cliente_id)
-        data_Instancia = [{"nome_livro": row[0], "autor_livro": row[1], "descricao_livro": row[2], "foto_livro": row[3], "genero_livro": row[4], "uuid_instancia": row[5], "foto_cliente": row[6], "uuid_cliente": row[7]} for row in data]
+        data_Instancia = [{"nome_livro": row[0], "autor_livro": row[1], "descricao_livro": row[2], "foto_livro": row[3], "genero_livro": row[4], "uuid_instancia": row[5], "foto_cliente": row[6], "uuid_cliente": row[7], "username_cliente": row[8]} for row in data]
     
     return render_template('instancia.html', data_Instancia=data_Instancia, foto_cliente=foto_cliente, all_generos=all_generos, client_books=client_books)
 
@@ -286,6 +301,20 @@ def cadastro_instanciaPost():
         
 
     return redirect(url_for('books', UUID_Instancia=uuid_instancia))
+
+@app.route('/perfil', methods=['GET'])
+def perfilGet():
+    cliente_id = session.get('cliente_id')
+    with connect_db() as conn:
+        cursor = conn.cursor()
+
+    foto_cliente = get_foto_cliente(cursor, cliente_id)[0]
+    data = get_minhas_instancias(cursor,cliente_id)
+    all_generos = get_all_generos(cursor)
+    transacao = get_transacoes_data(cursor, cliente_id)
+    print(transacao)
+    
+    return render_template('perfil.html', foto_cliente=foto_cliente, data=data, all_generos=all_generos, transacao=transacao)
 
 # Execução da aplicação
 if __name__ == '__main__':
