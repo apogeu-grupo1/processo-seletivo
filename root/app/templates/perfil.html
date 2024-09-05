@@ -38,9 +38,7 @@
             </a>
             <div class="dropdown-foto">
                 <a href="/perfil">Meu Perfil</a>
-                <a href="#amigos">Amigos</a>
-                <a href="#configuracoes">Configurações</a>
-                <a href="#sair">Sair</a>
+                <a href="/" id="sair-link">Sair</a> <!-- Adiciona um id ao link -->
             </div>
         </div>
     </nav>
@@ -66,8 +64,21 @@
                         </a>
                     </div>
                     <div class="botoes">
-                        <button>Aceitar</button>
-                        <button>Recusar</button>
+                        <form action="/aceitar_proposta" method="POST" style="display:inline;">
+
+                            <input type="hidden" name="uuid_transacao" value="{{ item.uuid_transacao }}">
+                            <input type="hidden" name="uuid_instancia_1" value="{{ item.uuid_instancia_1 }}">
+                            <input type="hidden" name="uuid_instancia_2" value="{{ item.uuid_instancia_2 }}">
+
+                            <button id="botao1" type="submit">Aceitar</button>
+                        </form>
+                        
+                        <form action="/recusar_proposta" method="POST" style="display:inline;">
+
+                            <input type="hidden" name="uuid_transacao" value="{{ item.uuid_transacao }}">
+
+                            <button type="submit">Recusar</button>
+                        </form>
                     </div>
                 </div>
                {% endfor %}
@@ -77,7 +88,13 @@
             </div>
         </div>
         <div class="main-content">
-            <h2>Meus Livros</h2>
+            <div class="first-row">
+                <h2>Meus Livros</h2>
+
+                <a href="cadastro_instancia" class="link-cadastro">
+                    Cadastrar livro
+                </a>
+            </div>
             <div class="imagens">
                 <div class="primeira-fileira">
                     {% for item in data %}
@@ -94,4 +111,23 @@
     
 
 </body>
+<script>
+    document.getElementById("sair-link").addEventListener("click", function(event) {
+        event.preventDefault(); // Impede o comportamento padrão do link
+    
+        // Envia uma requisição POST para a rota de logout no Flask
+        fetch('/perfil', { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    // Redireciona o usuário após o logout
+                    window.location.href = "/";
+                } else {
+                    alert("Erro ao tentar sair.");
+                }
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+            });
+    });
+</script>
 </html>

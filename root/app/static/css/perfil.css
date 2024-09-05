@@ -90,6 +90,7 @@ main {
     border-radius: 5px;
 }
 
+
 .dropdown-categorias {
     position: relative;
     cursor: pointer;
@@ -159,6 +160,18 @@ main {
 
 .dropdown-foto a:hover {
     background-color: #ddd;
+}
+
+.botao-deslogar {
+    width: 120px; 
+    height: 40px; 
+    padding: 10px; 
+    font-size: 16px; 
+    background-color: #f00; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
 }
 
 .profile:hover .dropdown-foto {
@@ -289,25 +302,18 @@ main {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.botoes {
-    margin-top: 15px; /* Espaçamento entre as imagens e os botões */
-    display: flex;
-    justify-content: space-between; /* Mantém os botões espaçados uniformemente */
-    width: 100%; /* Faz os botões ocuparem a mesma largura das imagens */
-}
-
+/* Adicione o estilo dos botões de aceitar e recusar para combinar com o estilo existente */
 .botoes button {
     padding: 8px 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #9FD4D4;
     color: white;
     font-size: 14px;
     width: 48%; /* Para que os botões ocupem metade da largura */
 }
 
-.botoes button:first-child {
+#botao1 {
     background-color: #4CAF50; /* Cor de aceitar */
 }
 
@@ -318,7 +324,6 @@ main {
 .botoes button:hover {
     opacity: 0.8;
 }
-
 
 
 
@@ -339,4 +344,31 @@ main {
 .imagens img:hover{
     transform: scale(1.05);
     transition: transform 0.3s ease;
+}
+
+.first-row{
+    display: flex;
+}
+
+.link-cadastro {
+    display: inline-block;
+    font-size: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    text-align: center; 
+    vertical-align: middle;
+    text-decoration: none;
+    border: none;
+    cursor: pointer; 
+    transition: background-color 0.3s ease;
+    height: 4vh;
+    width: 14vw;
+    margin-left: 40vw;
+    margin-top: 2.2vh;
+
+}
+
+.link-cadastro:hover {
+    background-color: #45a049;
 }

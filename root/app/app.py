@@ -89,7 +89,7 @@ def get_all_generos(cursor):
 
 def get_data_instancia(cursor, uuid_instancia):
     cursor.execute('''
-            SELECT Livros."Nome Livro", Livros."Autor Livro", Livros."Descricao do Livro", Livros."Foto Capa", Generos."Nome Genero", Instancias."UUID Instancia", Clientes."Foto CLiente", Clientes."UUID CLiente", Clientes."Username Cliente"
+            SELECT Livros."Nome Livro", Livros."Autor Livro", Livros."Descricao do Livro", Livros."Foto Capa", Generos."Nome Genero", Instancias."UUID Instancia", Clientes."Foto CLiente", Clientes."UUID CLiente", Clientes."Username Cliente", Clientes."Telefone Cliente"
             FROM Instancias
             JOIN Livros ON Instancias."UUID Livro" = Livros."UUID Livro"
             JOIN Generos ON Livros."UUID Genero" = Generos."UUID Genero"
@@ -124,7 +124,7 @@ def get_transacoes_data(cursor, uuid_cliente):
 			JOIN Instancias AS inst2 ON Transações."UUID Instancia livro2" = inst2."UUID Instancia"
 			JOIN Livros AS livros1 ON inst1."UUID Livro" = livros1."UUID Livro"
 			JOIN Livros AS livros2 ON inst2."UUID Livro" = livros2."UUID Livro"
-			WHERE inst1."UUID Cliente" = ?
+			WHERE inst1."UUID Cliente" = ? AND Transações."Status Transacao" = 'Pendente'
         ''', (uuid_cliente,))
     
     rows = cursor.fetchall()
@@ -186,6 +186,23 @@ def register():
 
 @app.route('/search')
 def search():
+    if request.method == 'POST':
+            login_token = session.get('login_token')
+            cliente_id = session.get('cliente_id')  # Recupera o UUID do cliente da sessão
+            if not login_token:
+                # Remove os dados da sessão corretamente
+                session.pop('login_token', None)  # Remove o login_token da sessão
+                session.pop('cliente_id', None)   # Remove o cliente_id da sessão
+
+                # Cria a resposta de redirecionamento para a homepage
+                resp = redirect(url_for('homepage'))
+
+                # Opcional: Apaga cookies específicos, caso eles tenham sido criados
+                resp.delete_cookie('login_token')  # Apaga o cookie de login_token
+                resp.delete_cookie('cliente_id')   # Apaga o cookie de cliente_id
+                
+                return resp  # Retorna a resposta com os cookies apagados 
+    
     cliente_id = session.get('cliente_id')
 
     with connect_db() as conn:
@@ -205,8 +222,20 @@ def home():
     cliente_id = session.get('cliente_id')  # Recupera o UUID do cliente da sessão
     
     if not login_token:
-        return redirect(url_for('loginPost'))
+        # Remove os dados da sessão corretamente
+        session.pop('login_token', None)  # Remove o login_token da sessão
+        session.pop('cliente_id', None)   # Remove o cliente_id da sessão
 
+        # Cria a resposta de redirecionamento para a homepage
+        resp = redirect(url_for('homepage'))
+
+        # Opcional: Apaga cookies específicos, caso eles tenham sido criados
+        resp.delete_cookie('login_token')  # Apaga o cookie de login_token
+        resp.delete_cookie('cliente_id')   # Apaga o cookie de cliente_id
+        
+        return resp  # Retorna a resposta com os cookies apagados
+
+    
     #FUNCAO GET_GENEROS_CLIENTE ***********************************
     with connect_db() as conn:
         cursor = conn.cursor()
@@ -232,7 +261,23 @@ def books(UUID_Instancia):
         cursor = conn.cursor()
 
         if request.method == 'POST':
-            
+            login_token = session.get('login_token')
+            cliente_id = session.get('cliente_id')  # Recupera o UUID do cliente da sessão
+            if not login_token:
+                # Remove os dados da sessão corretamente
+                session.pop('login_token', None)  # Remove o login_token da sessão
+                session.pop('cliente_id', None)   # Remove o cliente_id da sessão
+
+                # Cria a resposta de redirecionamento para a homepage
+                resp = redirect(url_for('homepage'))
+
+                # Opcional: Apaga cookies específicos, caso eles tenham sido criados
+                resp.delete_cookie('login_token')  # Apaga o cookie de login_token
+                resp.delete_cookie('cliente_id')   # Apaga o cookie de cliente_id
+                
+                return resp  # Retorna a resposta com os cookies apagados
+
+
             uuid_instancia_livro_2 = request.form['livro_nome']
             uuid_instancia_livro_1 = request.form['uuid_instancia_livro_1']
             data_atual = datetime.datetime.now()
@@ -261,7 +306,7 @@ def books(UUID_Instancia):
         foto_cliente = get_foto_cliente(cursor, cliente_id)[0]
         all_generos = get_all_generos(cursor)
         client_books = get_minhas_instancias(cursor, cliente_id)
-        data_Instancia = [{"nome_livro": row[0], "autor_livro": row[1], "descricao_livro": row[2], "foto_livro": row[3], "genero_livro": row[4], "uuid_instancia": row[5], "foto_cliente": row[6], "uuid_cliente": row[7], "username_cliente": row[8]} for row in data]
+        data_Instancia = [{"nome_livro": row[0], "autor_livro": row[1], "descricao_livro": row[2], "foto_livro": row[3], "genero_livro": row[4], "uuid_instancia": row[5], "foto_cliente": row[6], "uuid_cliente": row[7], "username_cliente": row[8], "telefone_cliente": row[9]} for row in data]
     
     return render_template('instancia.html', data_Instancia=data_Instancia, foto_cliente=foto_cliente, all_generos=all_generos, client_books=client_books)
 
@@ -315,6 +360,58 @@ def perfilGet():
     print(transacao)
     
     return render_template('perfil.html', foto_cliente=foto_cliente, data=data, all_generos=all_generos, transacao=transacao)
+
+@app.route('/perfil', methods=['POST'])
+def perfilPost():
+    # Remove os dados da sessão corretamente
+    session.pop('login_token', None)  # Remove o login_token da sessão
+    session.pop('cliente_id', None)   # Remove o cliente_id da sessão
+    
+    # Cria a resposta de redirecionamento
+    resp = redirect(url_for('homepage'))  # Redireciona para a homepage
+
+    # Opcional: Apagar cookies específicos, caso você tenha cookies personalizados
+    resp.delete_cookie('login_token')  # Apaga o cookie de login_token se ele existir
+    resp.delete_cookie('cliente_id')   # Apaga o cookie de cliente_id se ele existir
+    
+    return resp
+
+
+@app.route('/aceitar_proposta', methods=['POST'])
+def aceitar_proposta():
+    uuid_transacao = request.form['uuid_transacao']
+    uuid_instancia_1 = request.form['uuid_instancia_1']
+    uuid_instancia_2 = request.form['uuid_instancia_2']
+
+    
+    with connect_db() as conn:
+        cursor = conn.cursor()
+
+    
+    cursor.execute('UPDATE Transações SET "Status Transacao" = "Aceita" WHERE "UUID Transacao" = ?', (uuid_transacao,))
+    
+    
+    cursor.execute('''
+            UPDATE Transações SET "Status Transacao" = "Cancelada" 
+            WHERE "UUID Instancia livro1" = ? OR "UUID Instancia livro2" = ? OR "UUID Instancia livro2" = ? OR "UUID Instancia livro1" = ? AND "Status Transacao" = 'Pendente'
+        ''', (uuid_instancia_1, uuid_instancia_2, uuid_instancia_2, uuid_instancia_1))
+    conn.commit()
+
+    return redirect(url_for('perfilGet'))
+
+
+@app.route('/recusar_proposta', methods=['POST'])
+def recusar_proposta():
+    uuid_transacao = request.form['uuid_transacao']
+
+    with connect_db() as conn:
+        cursor = conn.cursor()
+
+    
+    cursor.execute('UPDATE Transações SET "Status Transacao" = "Recusada" WHERE "UUID Transacao" = ?', (uuid_transacao,))
+    conn.commit()
+
+    return redirect(url_for('perfilGet'))
 
 # Execução da aplicação
 if __name__ == '__main__':
