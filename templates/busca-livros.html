@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de livros</title>
+    <link rel="stylesheet" href="/static/css/busca-livros.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/home">
+                <img src="/static/img/logo.png" alt="Logo" height="150"> <!-- Mudar a logo depois -->
+            </a>
+        </div>
+
+        <div class="searchbar">
+            <form action="/search" method="GET">
+                <input type="text" name="q" placeholder="Pesquisar...">
+                <button class="botao-busca" type="submit">Buscar</button>
+            </form>
+        </div>
+
+        <ul class="nav-links">
+            <li class="dropdown-categorias">
+                <a href="#categorias">Categorias</a> <!-- Mudar o link de redirecionamento -->
+
+                <div class="dropdown-categorias-menu">
+                    {% for item in lista_generos %}
+                    <a href="#categorias1">{{item[0]}}</a>
+                    {% endfor %}
+                </div>
+            </li>
+        </ul>
+        <div class="profile">
+            <a href="#perfil"></a>
+                <img src="{{ foto_cliente }}" alt="Perfil" height="80">
+            </a>
+            <div class="dropdown-foto">
+                <a href="#meuperfil">Meu Perfil</a>
+                <a href="#amigos">Amigos</a>
+                <a href="#configuracoes">Configurações</a>
+                <a href="#sair">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="imagens">
+            <div class="primeira-fileira">
+                {% for item in data %}
+                <div class="livro-titulo">
+                    <a href="/books/{{item.uuid_instancia}}" class="imagensLivros"><img src="{{ item.foto }}" alt="{{ item.titulo }}"></a>
+                    <label for="imagensLivros">{{ item.titulo }}</label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

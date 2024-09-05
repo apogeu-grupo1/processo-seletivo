@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Instância de Livro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro_instancia.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastrar nova instância de Livro</h1>
+        <div class="allInputsContainer">
+            <div class="inputs1Container">
+                
+                <div class="uuidLivroContainer">
+                    <label for="livro_nome">Selecione um Livro:</label>
+                    <select id="livro_nome" name="livro_nome" required>
+                        {%for item in livros%}
+                        <option value="{{ item[0] }}">{{ item[0] }}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                
+                <div class="statusContainer">
+                    <label for="status">Selecione uma opção:</label><br>
+                    <select id="status" name="status" required>
+                        <option value="Disponível">Disponível</option>
+                        <option value="Indisponível">Indisponível</option>
+                    </select><br><br>
+                </div>
+            </div>
+            <div class="botaoInteiro">
+                <button class="botaoDeCadastro" id="submitCadastro" type="submit">Cadastrar Instância</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="{{ url_for('static', filename='js/cadastro_instancia.js') }}"></script>
+</html>

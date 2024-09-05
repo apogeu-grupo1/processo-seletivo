@@ -1,0 +1,63 @@
+*{
+    margin: 0.8%;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-top: 0.25%;
+    
+}
+
+body{
+    background-color: #9FD4D4;
+
+}
+
+.container {
+    border-color: #E7E7E7;
+    background-color: #E7E7E7;
+    border-radius: 10px;
+    padding: 2vw;
+    width: 60vw;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+input {
+    height: 5vh;
+    width: 30vw;
+    background-color: #f6f6f6;
+    border: none;
+    border-radius: 10px;
+    padding-left: 0.5vw;
+}
+
+.uuidInstanciaContainer, .uuidLivroContainer, .uuidGeneroContainer, .statusContainer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 4vh;
+    padding-left: 3vw;
+}
+
+.uuidInstanciaContainer input, .uuidLivroContainer input, .uuidGeneroContainer input, .statusContainer input {
+    margin-top: 1vh;
+}
+
+.botaoDeCadastro {
+    height: 7vh;
+    width: 15vw;
+    border-radius: 10px;
+    background-color: #4DB1D1;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 5vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.botaoDeCadastro:active {
+    background-color: #15A6A3;
+    border: none;
+}
