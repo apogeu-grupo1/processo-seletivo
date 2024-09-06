@@ -135,7 +135,10 @@ def get_transacoes_data(cursor, uuid_cliente):
 # Rotas da aplicação
 @app.route('/', methods=['GET'])
 def homepage():
-    login_token = session['login_token']
+    if 'login_token' in session:
+        login_token = session['login_token']
+    else:
+        login_token = None
     if login_token:
         return redirect(url_for('home'))
     else:
@@ -351,6 +354,7 @@ def cadastro_instanciaPost():
 @app.route('/perfil', methods=['GET'])
 def perfilGet():
     cliente_id = session['cliente_id']
+
     with connect_db() as conn:
         cursor = conn.cursor()
 
