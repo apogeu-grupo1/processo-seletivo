@@ -29,14 +29,15 @@ def insert_cliente(data):
     fotoCliente = data.get('fotoCliente')
     senha = data.get('senha')
     hash_senha = bcrypt.generate_password_hash(senha).decode('utf-8')
+    uuid_cliente = str(uuid.uuid4())
 
     with connect_db() as conn:
         cursor = conn.cursor()
         cursor.execute('''INSERT INTO Clientes 
-            ("Nome Cliente", "Email Cliente", "Telefone Cliente", "Username Cliente", "Pais Cliente", "Estado Cliente",
+            ("UUID Cliente", "Nome Cliente", "Email Cliente", "Telefone Cliente", "Username Cliente", "Pais Cliente", "Estado Cliente",
             "Cidade Cliente", "Generos Cliente", "Foto Cliente", "Hash Senha Cliente")
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', 
-            (nome, email, telefone, username, pais, estado, cidade, generosPreferidos, fotoCliente, hash_senha))
+            VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', 
+            (uuid_cliente, nome, email, telefone, username, pais, estado, cidade, generosPreferidos, fotoCliente, hash_senha))
         conn.commit()
 
 def search_books(query=None):
@@ -134,7 +135,7 @@ def get_transacoes_data(cursor, uuid_cliente):
 # Rotas da aplicação
 @app.route('/', methods=['GET'])
 def homepage():
-    login_token = session.get('login_token')
+    login_token = session['login_token']
     if login_token:
         return redirect(url_for('home'))
     else:
@@ -187,8 +188,8 @@ def register():
 @app.route('/search')
 def search():
     if request.method == 'POST':
-            login_token = session.get('login_token')
-            cliente_id = session.get('cliente_id')  # Recupera o UUID do cliente da sessão
+            login_token = session['login_token']
+            cliente_id = session['cliente_id']  # Recupera o UUID do cliente da sessão
             if not login_token:
                 # Remove os dados da sessão corretamente
                 session.pop('login_token', None)  # Remove o login_token da sessão
@@ -203,7 +204,7 @@ def search():
                 
                 return resp  # Retorna a resposta com os cookies apagados 
     
-    cliente_id = session.get('cliente_id')
+    cliente_id = session['cliente_id']
 
     with connect_db() as conn:
         cursor = conn.cursor()
@@ -218,8 +219,8 @@ def search():
 
 @app.route('/home')
 def home():
-    login_token = session.get('login_token')
-    cliente_id = session.get('cliente_id')  # Recupera o UUID do cliente da sessão
+    login_token = session['login_token']
+    cliente_id = session['cliente_id']  # Recupera o UUID do cliente da sessão
     
     if not login_token:
         # Remove os dados da sessão corretamente
@@ -255,14 +256,14 @@ def home():
 
 @app.route('/books/<UUID_Instancia>', methods=['GET', 'POST'])
 def books(UUID_Instancia):
-    cliente_id = session.get('cliente_id')
+    cliente_id = session['cliente_id']
     
     with connect_db() as conn:
         cursor = conn.cursor()
 
         if request.method == 'POST':
-            login_token = session.get('login_token')
-            cliente_id = session.get('cliente_id')  # Recupera o UUID do cliente da sessão
+            login_token = session['login_token']
+            cliente_id = session['cliente_id']  # Recupera o UUID do cliente da sessão
             if not login_token:
                 # Remove os dados da sessão corretamente
                 session.pop('login_token', None)  # Remove o login_token da sessão
@@ -282,13 +283,13 @@ def books(UUID_Instancia):
             uuid_instancia_livro_1 = request.form['uuid_instancia_livro_1']
             data_atual = datetime.datetime.now()
             data_cadastro_troca = data_atual.strftime("%d/%m/%Y")
-
+            uuid_transacao = str(uuid.uuid4())
             try:
             
                 cursor.execute('''
-                    INSERT INTO Transações ("UUID Instancia livro1", "UUID Instancia livro2", "Data Transaçao","Status Transacao")
-                    VALUES (?, ?, ?, ?)
-                ''', (uuid_instancia_livro_1, uuid_instancia_livro_2, data_cadastro_troca, 'Pendente'))
+                    INSERT INTO Transações ("UUID Transacao", "UUID Instancia livro1", "UUID Instancia livro2", "Data Transaçao","Status Transacao")
+                    VALUES (?, ?, ?, ?,?)
+                ''', (uuid_transacao, uuid_instancia_livro_1, uuid_instancia_livro_2, data_cadastro_troca, 'Pendente'))
             
                 conn.commit()
 
@@ -312,7 +313,7 @@ def books(UUID_Instancia):
 
 @app.route('/cadastro_instancia', methods=['GET'])
 def cadastro_instanciaGet():
-    login_token = session.get('login_token')
+    login_token = session['login_token']
     
     if not login_token:
         return redirect(url_for('loginPost'))
@@ -325,8 +326,8 @@ def cadastro_instanciaGet():
 
 @app.route('/cadastro_instancia', methods=['POST'])
 def cadastro_instanciaPost():
-    cliente_id = session.get('cliente_id')
-    
+    cliente_id = session['cliente_id']
+    uuid_instancia = str(uuid.uuid4())
     dataCadastro = request.json
     nome_livro = dataCadastro['livro_nome']
     data_atual = datetime.datetime.now()
@@ -338,18 +339,18 @@ def cadastro_instanciaPost():
     with sqlite3.connect(DATABASE) as conn:
         cursor = conn.cursor()
         uuid_livro = getUuidBook(cursor,nome_livro)
-        cursor.execute('''INSERT INTO Instancias ("UUID Livro", "UUID Cliente", "Data Cadastro Instancia", "Status instancia")
-                            VALUES (?, ?, ?, ?)''', (uuid_livro[0], uuid_cliente, data_cadastro_instancia, status_instancia))
+        cursor.execute('''INSERT INTO Instancias ("UUID Instancia", "UUID Livro", "UUID Cliente", "Data Cadastro Instancia", "Status instancia")
+                            VALUES (?, ?, ?, ?, ?)''', (uuid_instancia,uuid_livro[0], uuid_cliente, data_cadastro_instancia, status_instancia))
         conn.commit()
         livros = getBooks(cursor)
-        uuid_instancia = cursor.lastrowid
+       
         
 
     return redirect(url_for('books', UUID_Instancia=uuid_instancia))
 
 @app.route('/perfil', methods=['GET'])
 def perfilGet():
-    cliente_id = session.get('cliente_id')
+    cliente_id = session['cliente_id']
     with connect_db() as conn:
         cursor = conn.cursor()
 
